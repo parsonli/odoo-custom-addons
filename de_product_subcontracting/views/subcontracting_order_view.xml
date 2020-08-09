@@ -1,0 +1,158 @@
+<odoo>
+    <!-- 修改 purchase order form 表单 -->
+    <record id="subcontract_order_purchase_order_form_view" model="ir.ui.view">
+        <field name="name">subcontract.order.purchase.order.form.view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button type="object"
+                        name="action_view_delivery"
+                        class="oe_stat_button"
+                        icon="fa-truck"
+                        attrs="{'invisible':[('subcontract_id','=',False)]}">
+                    <field name="delivery_count" widget="statinfo" string="委外 交货" help="Incoming Shipments"/>
+                    <field name="subcontract_id" invisible="1"/>
+                </button>
+            </xpath>
+
+        </field>
+    </record>
+    <!-- Subcontracting Form 表单 -->
+    <record id="subcontract_order_form_view" model="ir.ui.view">
+        <field name="name">subcontract.order.form.view</field>
+        <field name="model">purchase.subcontract.order</field>
+        <field name="arch" type="xml">
+            <form string="Subcontracting Order">
+                <header>
+                    <button name="action_confirm" type="object" states="draft" string="Confirm Order" id="draft_confirm"/>
+                    <button name="action_draft" states="cancel" string="Set to Draft" type="object" />
+                    <button name="action_cancel" states="draft,subcontract" string="Cancel" type="object" />
+                    <button name="action_done" type="object" string="Lock" states="subcontract"/>
+                    <button name="action_unlock" type="object" string="Unlock" states="done" groups="purchase.group_purchase_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,subcontract,done,cancel" readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="picking_ids" invisible="1"/>
+                        <button type="object"
+                                name="action_view_delivery"
+                                class="oe_stat_button"
+                                icon="fa-truck"
+                                groups="base.group_user">
+                        <field name="delivery_count" widget="statinfo" string="Picking"/>
+                    </button>
+                        <button type="object"
+                                name="action_view_purchase"
+                                class="oe_stat_button"
+                                icon="fa-file-text-o"
+                                groups="base.group_user">
+                        <field name="purchase_count" widget="statinfo" string="Purchase"/>
+                    </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" readonly="1" force_save="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" domain="[('supplier', '=', 'True')]" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
+                            <field name="location_id" domain="[('usage', '=', 'inventory')]" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
+                            <field name="service_id" domain="[('type', '=', 'service')]" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
+                            <field name="price_unit" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
+                            <field name="taxes_id"
+                                   widget="many2many_tags"
+                                   attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"
+                                   domain="[('type_tax_use','=','purchase')]"
+                                   context="{'default_type_tax_use': 'purchase', 'search_view_ref': 'account.account_tax_view_search'}"
+                                   options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="date_order" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
+                            <field name="date_planned" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
+                            <field name="user_id" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                    <separator string="Finish Product"/>
+                        <p class="oe_grey">
+                            Finish product for subcontracting order.
+                        </p>
+                    <group>
+                         <group>
+                            <field name="product_id" domain="[('purchase_ok', '=', 'True')]" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
+                             <field name="product_uom_id" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
+                            <field name="quantity" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
+                        </group>
+
+                    </group>
+                    <notebook>
+                        <page string="Components" name="components">
+                            <field name="order_lines" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}" >
+                                <tree editable="bottom">
+                                    <field name="product_id" domain="[('purchase_ok', '=', 'True')]" />
+                                    <field name="product_uom_id"/>
+                                    <field name="product_qty"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <!--<page string="Other Information" name="other_information">
+
+                        </page>-->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Subcontracting Tree 表单 -->
+    <record id="subcontract_order_tree_view" model="ir.ui.view">
+        <field name="name">subcontract.order.tree.view</field>
+        <field name="model">purchase.subcontract.order</field>
+        <field name="arch" type="xml">
+            <tree string="Subcontracting Order">
+                <field name="name"/>
+                <field name="date_order"/>
+                <field name="partner_id"/>
+                <field name="company_id"/>
+                <field name="product_id"/>
+                <field name="quantity"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Subcontracting Action View -->
+    <record id="subcontracting_order_action" model="ir.actions.act_window">
+        <field name="name">Subcontracting Order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.subcontract.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click here to create a new Subcontracting Order
+          </p>
+        </field>
+    </record>
+    <!--Subcontracting Order Filter-->
+    <record id="subcontract_order_view_search" model="ir.ui.view">
+            <field name="name">subcontract.order.search</field>
+            <field name="model">purchase.subcontract.order</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <search string="Search Subcontracting Order">
+                    <field name="name" string="订单或者产品" filter_domain="['|', ('name','ilike',self), ('product_id','ilike',self)]"/>
+                </search>
+
+            </field>
+        </record>
+    <menuitem id="subcontracting_order_menu" name="Subcontracting" parent="purchase.menu_purchase_root" sequence="10"/>
+    <menuitem id="subcontracting_order_menu_item" name="Subcontracting Order" parent="subcontracting_order_menu" action="subcontracting_order_action" sequence="10"/>
+
+</odoo>

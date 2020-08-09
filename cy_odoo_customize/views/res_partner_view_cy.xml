@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- 联系人form界面修改 -->
+        <record id="res_partner_view_cy" model="ir.ui.view">
+            <field name="name">res.partner.view.cy</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@name='sales_purchases']//field[@name='customer']"
+                       position="before">
+                    <!-- Add your fields or attributes here -->
+                    <field name="able_credit_limit_change" invisible="1"/>
+                    <field name="credit"
+                           attrs="{'invisible':[('is_company','=',False)]}"/>
+                    <field name="parent_credit" string="应收总计"
+                           attrs="{'invisible':[('is_company','=',True)]}"/>
+                    <field name="credit_limit"
+                           attrs="{'readonly':[('able_credit_limit_change','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='type']" position="before">
+                    <field name="ref" string="客户编号" attrs="{'invisible': [('is_company','=', False)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

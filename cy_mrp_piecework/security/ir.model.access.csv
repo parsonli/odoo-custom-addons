@@ -1,0 +1,7 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_piece_work,PieceWorkManager,model_piece_work,piece_work_manager,1,1,1,1
+access_piece_work_line,PieceWorkManager,model_piece_work_line,piece_work_manager,1,1,1,1
+access_piece_work_report,PieceWorkManager,model_piece_work_report,piece_work_manager,1,1,1,1
+access_piece_work_user,PieceWorkUser,model_piece_work,piece_work_user,1,0,0,0
+access_piece_work_line_user,PieceWorkUser,model_piece_work_line,piece_work_user,1,0,0,0
+access_piece_work_report_user,PieceWorkUser,model_piece_work_report,piece_work_user,1,0,0,0

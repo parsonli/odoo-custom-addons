@@ -1,0 +1,471 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* de_product_subcontracting
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20191025\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-07 08:12+0000\n"
+"PO-Revision-Date: 2019-12-07 18:19+0800\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: zh_CN\n"
+"X-Generator: Poedit 2.2.4\n"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__access_warning
+msgid "Access warning"
+msgstr "访问警告"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_needaction
+msgid "Action Needed"
+msgstr "前置操作"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__activity_ids
+msgid "Activities"
+msgstr "活动"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__activity_state
+msgid "Activity State"
+msgstr "活动状态"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__date_approve
+msgid "Approval Date"
+msgstr "审批日期"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_attachment_count
+msgid "Attachment Count"
+msgstr "附件数量"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+msgid "Cancel"
+msgstr "取消"
+
+#. module: de_product_subcontracting
+#: selection:purchase.subcontract.order,state:0
+msgid "Cancelled"
+msgstr "已取消"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.actions.act_window,help:de_product_subcontracting.subcontracting_order_action
+msgid "Click here to create a new Subcontracting Order"
+msgstr "点击这里，创建新的委外加工合同"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__company_id
+msgid "Company"
+msgstr "公司"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+msgid "Components"
+msgstr "组件"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+msgid "Confirm Order"
+msgstr "确认订单"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line__create_uid
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__create_uid
+msgid "Created by"
+msgstr "创建人"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line__create_date
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__access_url
+msgid "Customer Portal URL"
+msgstr "客户门户 URL"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_line__product_uom_id
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__product_uom_id
+msgid "Default unit of measure used for all stock operations."
+msgstr "所有库存商品的缺省单位。"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__delivery_count
+msgid "Delivery Orders"
+msgstr "交货单"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__date_order
+msgid "Depicts the date where the Quotation should be validated and converted into a purchase order."
+msgstr "记录询价单被确认并被转化为采购订单的日期。"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line__display_name
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: de_product_subcontracting
+#: selection:purchase.subcontract.order,state:0
+msgid "Draft"
+msgstr "草稿"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+msgid "Finish Product"
+msgstr "最终产品"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+msgid "Finish product for subcontracting order."
+msgstr "委外加工订单的最终交货产品。"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_follower_ids
+msgid "Followers"
+msgstr "关注者"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "关注者(渠道)"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "关注者(业务伙伴)"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line__id
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__id
+msgid "ID"
+msgstr "ID号"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__message_unread
+msgid "If checked new messages require your attention."
+msgstr "查看是否有需要留意的新消息。"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "确认后, 出现提示消息."
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "如果勾选此项， 某些消息将会产生传递错误。"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_is_follower
+msgid "Is Follower"
+msgstr "关注者"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line____last_update
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order____last_update
+msgid "Last Modified on"
+msgstr "最后修改时间"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line__write_uid
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__write_uid
+msgid "Last Updated by"
+msgstr "最后更新者"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line__write_date
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__write_date
+msgid "Last Updated on"
+msgstr "最后更新时间"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+msgid "Lock"
+msgstr "锁"
+
+#. module: de_product_subcontracting
+#: selection:purchase.subcontract.order,state:0
+msgid "Locked"
+msgstr "以锁定"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "附件"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_has_error
+msgid "Message Delivery error"
+msgstr "消息递送错误"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_ids
+msgid "Messages"
+msgstr "消息"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_view_search
+msgid "My Orders"
+msgstr "我的订单"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "下一活动截止日期"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__activity_summary
+msgid "Next Activity Summary"
+msgstr "下一个活动摘要"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__activity_type_id
+msgid "Next Activity Type"
+msgstr "下一活动类型"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_needaction_counter
+msgid "Number of Actions"
+msgstr "操作次数"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_has_error_counter
+msgid "Number of error"
+msgstr "错误个数"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "需要操作消息数量"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "递送错误消息数量"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__message_unread_counter
+msgid "Number of unread messages"
+msgstr "未读消息数量"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__date_order
+msgid "Order Date"
+msgstr "单据日期"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__order_lines
+msgid "Order Lines"
+msgstr "订单行"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line__order_id
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__name
+msgid "Order Reference"
+msgstr "订单关联"
+
+#. module: de_product_subcontracting
+#: selection:purchase.subcontract.order,activity_state:0
+msgid "Overdue"
+msgstr "逾期"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+msgid "Picking"
+msgstr "收/交货 调拨单"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__picking_ids
+msgid "Pickings"
+msgstr "拣货"
+
+#. module: de_product_subcontracting
+#: selection:purchase.subcontract.order,activity_state:0
+msgid "Planned"
+msgstr "已计划"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__access_url
+msgid "Portal Access URL"
+msgstr "门户访问 URL"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line__product_id
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__product_id
+msgid "Product"
+msgstr "产品"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__purchase_count
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+msgid "Purchase"
+msgstr "采购单"
+
+#. module: de_product_subcontracting
+#: model:ir.model,name:de_product_subcontracting.model_purchase_order
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__purchase_ids
+msgid "Purchase Order"
+msgstr "采购订单"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__user_id
+msgid "Purchase Representative"
+msgstr "采购员"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line__product_qty
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__quantity
+msgid "Quantity"
+msgstr "数量"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__activity_user_id
+msgid "Responsible User"
+msgstr "责任用户"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__date_planned
+msgid "Scheduled Date"
+msgstr "计划日期"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_view_search
+msgid "Search Subcontracting Order"
+msgstr "搜索委外加工合同"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__access_token
+msgid "Security Token"
+msgstr "安全令牌"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__service_id
+msgid "Service"
+msgstr "服务"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+msgid "Set to Draft"
+msgstr "设为草稿"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__state
+msgid "Status"
+msgstr "状态"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"基于活动的状态 \n"
+" 逾期：已经超过截止日期 \n"
+" 现今：活动日期是当天 \n"
+" 计划：未来的活动。"
+
+#. module: de_product_subcontracting
+#: model:stock.picking.type,name:de_product_subcontracting.picking_type_dropship
+msgid "Subcontract"
+msgstr "委外加工"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_order__subcontract_id
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_stock_picking__subcontract_id
+msgid "Subcontract Order"
+msgstr "委外加工合同"
+
+#. module: de_product_subcontracting
+#: model:ir.model,name:de_product_subcontracting.model_purchase_subcontract_line
+msgid "Subcontract Order Line"
+msgstr "委外加工合同行"
+
+#. module: de_product_subcontracting
+#: model:ir.ui.menu,name:de_product_subcontracting.subcontracting_order_menu
+msgid "Subcontracting"
+msgstr "委外加工"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__location_id
+msgid "Subcontracting Location"
+msgstr "虚拟仓库位置"
+
+#. module: de_product_subcontracting
+#: model:ir.actions.act_window,name:de_product_subcontracting.subcontracting_order_action
+#: model:ir.model,name:de_product_subcontracting.model_purchase_subcontract_order
+#: model:ir.ui.menu,name:de_product_subcontracting.subcontracting_order_menu_item
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_tree_view
+#: selection:purchase.subcontract.order,state:0
+msgid "Subcontracting Order"
+msgstr "委外加工 订单"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__location_id
+msgid "The vendor location for subcontracting process"
+msgstr "供应商的虚拟位置"
+
+#. module: de_product_subcontracting
+#: selection:purchase.subcontract.order,activity_state:0
+msgid "Today"
+msgstr "今天"
+
+#. module: de_product_subcontracting
+#: model:ir.model,name:de_product_subcontracting.model_stock_picking
+msgid "Transfer"
+msgstr "调拨"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_line__product_uom_id
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__product_uom_id
+msgid "UOM"
+msgstr "单位"
+
+#. module: de_product_subcontracting
+#: model_terms:ir.ui.view,arch_db:de_product_subcontracting.subcontract_order_form_view
+msgid "Unlock"
+msgstr "解锁"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_unread
+msgid "Unread Messages"
+msgstr "未读消息"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "未读消息计数器"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__partner_id
+msgid "Vendor"
+msgstr "供应商"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,field_description:de_product_subcontracting.field_purchase_subcontract_order__website_message_ids
+msgid "Website Messages"
+msgstr "网站信息"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__website_message_ids
+msgid "Website communication history"
+msgstr "网站沟通记录"
+
+#. module: de_product_subcontracting
+#: model:ir.model.fields,help:de_product_subcontracting.field_purchase_subcontract_order__partner_id
+msgid "You can find a vendor by its Name, TIN, Email or Internal Reference."
+msgstr "你可以通过它的名字，TIN，EMail或内部参考找到一个客户。"

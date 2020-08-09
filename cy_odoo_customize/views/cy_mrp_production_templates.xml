@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 生产任务单form界面修改 -->
+    <record id="mrp_production_form_view_cy" model="ir.ui.view">
+        <field name="name">mrp.production.form.cy</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='date_planned_start']" position="replace">
+                <!-- Add your fields or attributes here -->
+                <field name="date_planned_start" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='date_planned_finished']" position="replace">
+                <!-- Add your fields or attributes here -->
+                <field string="交货期" name="date_planned_finished" invisible="0"/>
+            </xpath>
+
+        </field>
+    </record>
+    <!-- 针式票据打印二等分 纸张格式 -->
+    <record id="paperformat_cy_landscape"
+            model="report.paperformat">
+        <field name="name">针式票据打印二等分</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">140</field>
+        <field name="page_width">241</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">90</field>
+    </record>
+    <!-- 打印生产任务单的动作 -->
+    <report
+            string="才用生产任务单"
+            id="action_report_production_order_cy"
+            model="mrp.production"
+            name="cy_odoo_customize.report_mrporder_cy"
+            report_type="qweb-pdf"
+            print_report_name="'任务单 - %s' % object.name"
+            paperformat="paperformat_cy_landscape"
+        />
+    <!-- 生产任务单表格 -->
+    <template id="report_mrporder_cy" name="才用生产任务单">
+            <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <h6 class="text-center" style="margin-top:0px; font-size:18px">
+                        <span t-field="o.name"/>
+                        <span>任务单</span>
+                    </h6>
+                    <div class="row mt2 mb2" style="font-size:18px">
+                        <div class="col-4">
+                            <span>S.CY/CR751-01</span>
+                        </div>
+                        <div class="col-4 text-center">
+                            <span>制单时间:</span>
+                            <span t-esc="time.strftime('%Y-%m-%d')"/>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span>来源:</span>
+                            <span t-if="o.origin" t-field="o.origin"/>
+                            <span t-else="">未找到相关单据</span>
+                        </div>
+                    </div>
+
+                    <div  class="d-flex flex-wrap" style="font-size:20px; border:1px solid black;">
+                         <div class="p-2 mt2 mb2">
+                             <span t-field="o.product_id.attribute_value_ids"/>
+                         </div>
+                    </div>
+
+                    <div class="row" style="font-size:18px">
+                        <div class="col-6">
+                            <strong>产品:</strong>
+                            <span t-field="o.product_id"/>
+                        </div>
+                        <div class="col-6">
+                            <strong>在手数量(预测):</strong>
+                            <span t-field="o.product_id.qty_available"/>
+                            <span t-field="o.product_uom_id.name" groups="uom.group_uom"/>
+                            <span>(</span>
+                            <span t-field="o.product_id.virtual_available"/>
+                            <span>)</span>
+                        </div>
+                    </div>
+                    <div class="row" style="font-size:18px">
+                            <div class="col-6">
+                                <strong>待生产数量:</strong>
+                                <span t-field="o.product_qty"/>
+                                <span t-field="o.product_uom_id.name" groups="uom.group_uom"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>交货期:</strong>
+                                <span t-if="o.date_planned_finished">
+                                <span t-esc="o.date_planned_finished.strftime('%Y-%m-%d')"/>
+                                </span>
+                            </div>
+                    </div>
+                    </div>
+
+                    <table class="table table-sm text-center" style="font-size:18px;">
+                        <thead>
+                            <tr>
+                                <th>原材料编号及名称</th>
+                                <th>待消耗</th>
+                                <th>已预留</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.move_raw_ids" t-as="l">
+                                <td>
+                                    <span t-field="l.product_id"/>
+                                </td>
+                                <td>
+                                    <span t-field="l.product_uom_qty"/>
+                                    <span t-field="l.product_uom" groups="uom.group_uom"/>
+                                </td>
+                                <td>
+                                    <span t-field="l.reserved_availability"/>
+                                    <span t-field="l.product_uom" groups="uom.group_uom"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

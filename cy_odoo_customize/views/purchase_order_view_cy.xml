@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- 修改 purchase tree 表单-->
+        <record id="purchase_order_tree_cy" model="ir.ui.view">
+            <field name="name">purchase.order.tree.cy</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="attributes">
+                    <attribute name="widget">date</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_planned']" position="attributes">
+                    <attribute name="widget">date</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!-- 修改 purchase form 表单-->
+        <record id="purchase_order_form_cy" model="ir.ui.view">
+            <field name="name">purchase.order.form.cy</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="subcontract_id" attrs="{'invisible': [('subcontract_id','=',False)]}" options="{'no_create':True}"/>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='account_analytic_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='analytic_tag_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_planned']" position="attributes">
+                    <attribute name="widget">date</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

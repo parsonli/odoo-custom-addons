@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- 针式票据打印二等分 纸张格式 -->
+    <record id="paperformat_cy_landscape"
+            model="report.paperformat">
+        <field name="name">针式票据打印二等分</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">140</field>
+        <field name="page_width">241</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">90</field>
+    </record>
+    <!-- 打印会计凭证动作 -->
+    <report id="action_journal_entries_report"
+            model="account.move"
+            string="打印凭证"
+            report_type="qweb-pdf"
+            name="de_print_journal_entries.journal_entries_report_template"
+            print_report_name="'会计凭证 - %s' % object.name"
+            paperformat="paperformat_cy_landscape"/>
+    <!-- 会计凭证表格 -->
+    <template id="journal_entries_report_template">
+       <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+          <t t-set="total_debit" t-value="0"/>
+          <t t-set="total_credit" t-value="0"/>
+           <t t-call="web.basic_layout">
+                <div class="page">
+                    <h3 class="text-center">
+                        <strong>会计凭证</strong>
+                    </h3>
+                    <h6 class="text-center" style="margin-top:1px;" t-if="o.company_id.id" name="company">
+                        <center t-field="o.company_id.name"/>
+                    </h6>
+                    <div id="information" class="row" style="margin-top:4px;">
+                        <div class="col-4">
+                            <strong>编号: </strong>
+                            <span class="m-0" t-field="o.name"/>
+                        </div>
+                        <div class="col-4">
+                            <strong>参考: </strong>
+                            <span class="m-0" t-field="o.ref"/>
+                        </div>
+                        <div class="col-auto">
+                            <strong>类型: </strong>
+                            <span class="m-0" t-field="o.journal_id.type"/>
+                        </div>
+                        <div class="col-auto text-right">
+                            <strong>日期: </strong>
+                            <span class="m-0" t-field="o.date"/>
+                        </div>
+                    </div>
+
+                    <table style="font-size:14px;" class="table table-bordered table-sm">
+                        <thead class="text-center">
+                            <tr>
+                                <th colspan="3" class="text-center" style="border:1px solid black;">摘要</th>
+                                <th colspan="2" class="text-center" style="border:1px solid black;">科目</th>
+                                <th colspan="3" class="text-center" style="border:1px solid black;">合作伙伴</th>
+                                <th colspan="2" class="text-center" style="border:1px solid black;">借方</th>
+                                <th colspan="2" class="text-center" style="border:1px solid black;">贷方</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr t-foreach="o.line_ids" t-as="l">
+                                <td colspan="3" class="pt-0 pb-0" style="border:1px solid black;">
+                                    <span t-esc="l.name"/>
+                                </td>
+                                <td colspan="2" class="pt-0 pb-0" style="border:1px solid black;">
+                                    <span t-esc="l.account_id.code"/>
+                                    <span>-</span>
+                                    <span t-esc="l.account_id.name"/>
+                                </td>
+                                <td colspan="3" class="pt-0 pb-0" style="border:1px solid black;">
+                                    <span t-esc="l.partner_id.name"/>
+                                </td>
+                                <td colspan="2" class="text-right pt-0 pb-0" style="border:1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(l.debit)"/>
+                                </td>
+                                <t t-set="total_debit" t-value="total_debit + l.debit"/>
+                                <td colspan="2" class="text-right pt-0 pb-0" style="border:1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(l.credit)"/>
+                                </td>
+                                <t t-set="total_credit" t-value="total_credit + l.credit"/>
+                            </tr>
+                            <tr>
+                              <td colspan="8" class="text-right pt-0 pb-0" style="border:1px solid black;">
+                                <strong>总计： </strong>
+                              </td>
+                              <td colspan="2" class="text-right pt-0 pb-0" style="border:1px solid black;">
+                                <span t-esc="'{0:,.2f}'.format(total_debit)"/>
+                              </td>
+                              <td colspan="2" class="text-right pt-0 pb-0" style="border:1px solid black;">
+                                <span t-esc="'{0:,.2f}'.format(total_credit)"/>
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="footer" class="row" style="margin-top:4px;">
+                        <div class="col-4">
+                            <strong>制单：</strong>
+                            <span class="m-0" t-field="o.create_uid.name"/>
+                        </div>
+                        <div class="col-4 text-center">
+                            <strong>审核：</strong>
+                            <span class="m-0" t-field="o.write_uid.name"/>
+                        </div>
+                        <div class="col-4 text-right">
+                            <strong>状态：</strong>
+                            <span class="m-0" t-field="o.state"/>
+                        </div>
+                    </div>
+                    </div>
+                </t>
+                </t>
+            </t>
+    </template>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_subcontract_order,purchase.subcontract.order,model_purchase_subcontract_order,,1,1,1,1
+access_subcontract_line,purchase.subcontract.line,model_purchase_subcontract_line,,1,1,1,1

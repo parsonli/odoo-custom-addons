@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 计件form表格-->
+    <record id="piece_work_form_view" model="ir.ui.view">
+        <field name="name">piece.work.form.view</field>
+        <field name="model">piece.work</field>
+        <field name="arch" type="xml">
+            <form string="车间员工计件台账">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="produced_date"/>
+                        </group><group>
+                            <field name="worker_id" options="{'no_create':True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="台账" name="work_lines">
+                            <field name="work_line" widget="section_and_note_one2many" mode="tree,kanban">
+                                <tree string="计件台账" editable="bottom">
+                                    <control>
+                                        <create string="添加记录"/>
+                                    </control>
+                                    <field name="production_id" options="{'no_create':True}"/>
+                                    <field name="product_id" options="{'no_create':True}"/>
+                                    <field name="product_uom" options="{'no_create':True}"/>
+                                    <field name="amount_remain"/>
+                                    <field name="produced_quantity"/>
+                                    <field name="over_work"/>
+                                    <field name="piece_credit"/>
+                                    <field name="piece_credit_subtotal"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+                            <separator string="杂活和维修的计件分：195分/8小时，24.375分/小时。维修补分需要除以机器数量"/>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="计件总计" style="font-size:18px">
+                                <field name="amount_credit"/>
+                                <field name="amount_overwork_credit"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!-- 计件tree表格 -->
+    <record id="piece_work_tree_view" model="ir.ui.view">
+        <field name="name">piece.work.tree.view</field>
+        <field name="model">piece.work</field>
+        <field name="arch" type="xml">
+            <tree string="计件分统计表">
+                <field name="name"/>
+                <field name="produced_date"/>
+                <field name="worker_id"/>
+                <field name="amount_credit" sum="Total"/>
+                <field name="amount_overwork_credit" sum="Total"/>
+            </tree>
+        </field>
+    </record>
+    <!-- 计件search -->
+    <record id="piece_work_search_view" model="ir.ui.view">
+       <field name="name">piece.work.search.view</field>
+       <field name="model">piece.work</field>
+        <field name="arch" type="xml">
+            <search string="计件台账查询">
+                <field name="worker_id"/>
+                <field name="produced_date"/>
+                <group>
+                    <filter string="姓名" name="worker" context="{'group_by':'worker_id'}"/>
+                    <filter string="生产日期" name="date" context="{'group_by':'produced_date'}"/>
+                </group>
+        </search>
+       </field>
+    </record>
+    <!-- 计件明细tree表格 -->
+    <record id="piece_work_line_tree_view" model="ir.ui.view">
+        <field name="name">piece.work.line.tree.view</field>
+        <field name="model">piece.work.line</field>
+        <field name="arch" type="xml">
+            <tree string="计件分统计表" create="0">
+                <field name="produced_date"/>
+                <field name="worker_id"/>
+                <field name="production_id"/>
+                <field name="origin"/>
+                <field name="product_id"/>
+                <field name="amount_remain"/>
+                <field name="produced_quantity" sum="Total"/>
+                <field name="product_uom"/>
+                <field name="piece_credit_subtotal" sum="Total"/>
+                <field name="over_work_char"/>
+                <field name="note"/>
+            </tree>
+        </field>
+    </record>
+    <!-- 计件明细form表格 -->
+    <record id="piece_work_line_form_view" model="ir.ui.view">
+        <field name="name">piece.work.line.form.view</field>
+        <field name="model">piece.work.line</field>
+        <field name="arch" type="xml">
+            <form string="计件分统计表" create="0" edit="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="produced_date"/>
+                            <field name="production_id"/>
+                            <field name="origin"/>
+                            <field name="amount_remain"/>
+                            <field name="over_work_char"/>
+                        </group>
+                        <group>
+                            <field name="worker_id"/>
+                            <field name="product_id"/>
+                            <label for="produced_quantity" string="完成数量"/>
+                            <div class="o_row">
+                                <field name="produced_quantity"/>
+                                <field name="product_uom"/>
+                            </div>
+                            <field name="piece_credit_subtotal"/>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- 计件明细search -->
+    <record id="piece_work_line_search_view" model="ir.ui.view">
+       <field name="name">piece.work.line.search.view</field>
+       <field name="model">piece.work.line</field>
+        <field name="arch" type="xml">
+            <search string="明细查询">
+                <filter name="Negative Amount Remain" string="负数剩余数量" domain="[('amount_remain','&lt;',0)]"/>
+                <field name="origin"/>
+                <field name="production_id"/>
+                <field name="worker_id"/>
+                <field name="product_id"/>
+                <group>
+                    <filter string="加班" name="over_work" context="{'group_by':'over_work_char'}"/>
+                    <filter string="生产任务单" name="production" context="{'group_by':'production_id'}"/>
+                    <filter string="产品" name="product" context="{'group_by':'product_id'}"/>
+                    <separator/>
+                    <filter string="生产日期" name="date" context="{'group_by':'produced_date'}"/>
+                </group>
+        </search>
+       </field>
+    </record>
+    <!-- 计件 tree,form action -->
+    <record id="piece_work_action" model="ir.actions.act_window">
+        <field name="name">车间员工计件台账</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">piece.work</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            新建计件分记录
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+    <!-- 计件明细 tree,form action -->
+    <record id="piece_work_detail_action" model="ir.actions.act_window">
+        <field name="name">计件流水明细表</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">piece.work.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+    <!-- Top menu item -->
+    <menuitem name="计件"
+              id="piece_work_menu"
+              groups="piece_work_user"
+              web_icon="cy_mrp_piecework,static/description/icon.png"
+              sequence="76"/>
+
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="action_piece_work"
+              name="台账"
+              parent="piece_work_menu"
+              action="piece_work_action"
+              sequence="20"
+              groups="piece_work_manager"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="action_piece_work_detail" name="明细" parent="piece_work_menu" action="piece_work_detail_action" sequence="25"/>
+
+</odoo>

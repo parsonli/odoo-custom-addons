@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 针式票据打印二等分 纸张格式 -->
+    <record id="paperformat_cy_landscape"
+            model="report.paperformat">
+        <field name="name">针式票据打印二等分</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">140</field>
+        <field name="page_width">241</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">90</field>
+    </record>
+    <!-- 打印才用送货单动作 -->
+    <report
+            string="才用送货单"
+            id="action_report_stock_picking_cy"
+            model="stock.picking"
+            name="cy_odoo_customize.stock_picking_cy"
+            report_type="qweb-pdf"
+            print_report_name="'送货单 - %s' % object.name"
+            paperformat="paperformat_cy_landscape"
+        />
+    <!-- 才用送货单表格 -->
+    <template id="stock_picking_cy" name="才用送货单">
+            <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <h3 class="text-center" style="margin-top:0px">
+                        <strong>送货单</strong>
+                        <span t-field="o.name"/>
+                    </h3>
+                    <div class="text-center">
+                        <strong t-field="o.sale_id.company_id.name"/>
+                    </div>
+                    <div class="text-center">
+                        <span>地址：上海市奉贤区青港工业园区光大路88号 电话：021-57566939 网址：www.chemi-young.com</span>
+                    </div>
+                    <br/>
+                    <div class="row mt2 mb2" style="font-size:18px">
+                        <div class="col-8">
+                            <strong>收货单位:</strong>
+                            <span t-field="o.partner_id"/>
+                            <t t-if="o.sale_id.partner_invoice_id.is_company == True">
+                              <t t-esc="o.sale_id.partner_invoice_id.ref"/>
+                            </t>
+                            <t t-else="">
+                              <t t-esc="o.sale_id.partner_invoice_id.parent_id.ref"/>
+                            </t>
+                        </div>
+                        <div class="col-4 text-right">
+                            <strong>联系人电话:</strong>
+                            <span t-field="o.partner_id.mobile"/>
+                            <span t-field="o.partner_id.phone"/>
+                        </div>
+
+                    </div>
+                    <div class="row" style="font-size:18px">
+                        <div class="col-9">
+                            <strong>地址:</strong>
+                            <span t-field="o.partner_id.city"/>
+                            <span t-field="o.partner_id.state_id"/>
+                            <span t-field="o.partner_id.street"/>
+                            <span t-field="o.partner_id.street2"/>
+                        </div>
+                        <div class="col-3 text-right">
+                            <strong>日期:</strong>
+                            <span t-esc="time.strftime('%Y-%m-%d')"/>
+                        </div>
+                    </div>
+                <br/>
+
+                    <table class="table table-sm" style="font-size:18px;">
+                        <thead>
+                            <t t-if="o.origin">
+                                <strong>源单据:</strong>
+                                <span t-field="o.origin"/>
+                                <br/>
+                            </t>
+                            <tr>
+                                <th style="border:1px solid black;">产品</th>
+                                <th style="border:1px solid black;">说明</th>
+                                <th class="text-center" style="border:1px solid black;">数量</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="lines" t-value="o.move_lines.filtered(lambda x: x.product_uom_qty)"/>
+                                <tr t-foreach="lines" t-as="l">
+                                    <td style="border:1px solid black;">
+                                        <span t-field="l.product_id"/>
+                                    </td>
+                                    <td style="border:1px solid black;">
+                                        <span t-field="l.name"/>
+                                    </td>
+                                    <td class="text-center" style="border:1px solid black;">
+                                        <span t-field="l.product_uom_qty"/>
+                                        <span t-field="l.product_uom"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="12" style="font-size:10px; border:1px solid black;">
+                                            备注：1.货款尚未全部付清前，货物所有权归本公司所有。
+                                            2.如有疑问请于三日内向本公司提出，否则产品作合格论处，本公司概不负责。
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                        <div class="row" style="font-size:18px;">
+                            <div class="col-4">
+                                <srong>制单人:</srong>
+                                <span t-field="o.write_uid"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>送货单位经手人:</strong>
+                            </div>
+                            <div class="col-4">
+                                <strong>收货单位经手人:</strong>
+                            </div>
+                        </div>
+                        <br/>
+                        <p>
+                          <t t-if="o.backorder_ids and o.backorder_ids.filtered(lambda x: x.state not in ('done', 'cancel'))">
+                           您此次订单上的产品尚未全部运送完毕。如果您的所在仓库已经收到全部产品，请忽略此条消息！
+                          </t>
+                        </p>
+
+
+                         <div class="footer o_standard_footer" style="font-size:16px;">
+                            <div class="text-center">
+                                <ul class="list-inline mb8">
+                                    <li class="list-inline-item">（1）存根白</li>
+                                    <li class="list-inline-item">（2）客户红</li>
+                                    <li class="list-inline-item">（3）回单蓝</li>
+                                    <li class="list-inline-item">（4）财务黄</li>
+                                </ul>
+                            </div>
+                         </div>
+                </div>
+            </t>
+        </t>
+    </t>
+    </template>
+</odoo>
