@@ -1,0 +1,18 @@
+<openerp>
+    <data>
+      <record id="salespersondeliveryform" model="ir.ui.view">
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+          <field name="origin" position="after">
+            <field name="user_id"/>
+          </field>
+          <xpath expr="//field[@name='move_ids_without_package']//field[@name='product_id']" position="after">
+                <!-- Add your fields or attributes here -->
+                <field name="name" invisible="0"/>
+            </xpath>
+        </field>
+      </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,37 @@
+<openerp>
+    <data>
+      <template id="salesperson_delivery" inherit_id="stock.report_delivery_document">
+                  <xpath expr="//table[1]" position="replace">
+                    <table class="table table-condensed">
+                                           <thead>
+                                               <tr>
+                                                   <th t-if="o.origin"><strong>Order (Origin)</strong></th>
+                                                   <th t-if="o.create_uid"><strong>Salesperson</strong></th>
+                                                   <th name="td_sched_date_h">
+                                                       <strong>Date</strong>
+                                                   </th>
+                                               </tr>
+                                           </thead>
+                                           <tbody>
+                                               <tr>
+                                                   <td t-if="o.origin">
+                                                       <span t-field="o.origin"/>
+                                                   </td>
+                                                                                   <td t-if="o.create_uid">
+                                                       <span t-field="o.create_uid"/>
+                                                   </td>
+                                                   <td name="td_sched_date">
+                                                      <t t-if="o.state == 'done'">
+                                                           <span t-field="o.date_done"/>
+                                                      </t>
+                                                      <t t-if="o.state != 'done'">
+                                                           <span t-field="o.scheduled_date"/>
+                                                      </t>
+                                                   </td>
+                                               </tr>
+                                           </tbody>
+                                       </table>
+                  </xpath>
+              </template>
+</data>
+</openerp>
