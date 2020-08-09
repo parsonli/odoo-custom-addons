@@ -155,4 +155,16 @@
     <menuitem id="subcontracting_order_menu" name="Subcontracting" parent="purchase.menu_purchase_root" sequence="10"/>
     <menuitem id="subcontracting_order_menu_item" name="Subcontracting Order" parent="subcontracting_order_menu" action="subcontracting_order_action" sequence="10"/>
 
+    <!-- 修改 stock picking form 表单 -->
+    <record id="subcontract_order_stock_picking_form_view" model="ir.ui.view">
+        <field name="name">subcontract.order.stock.picking.form.view</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_quantity_done_editable']" position="after">
+                <field name="price_unit"  required="1" attrs="{'readonly': [('state', '==', 'done')]}" groups="abs_hide_sale_cost_price.group_cost_price_show"/>
+            </xpath>
+
+        </field>
+    </record>
 </odoo>

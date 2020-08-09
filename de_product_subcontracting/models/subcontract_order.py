@@ -173,7 +173,7 @@ class PurchaseSubcontracting(models.Model):
                     'partner_id': order.partner_id.id,
                     'state': 'confirmed',
                     'company_id': self.env.user.company_id.id,
-                    #'price_unit': order.product_id.standard_price or 0.0,
+                    'price_unit': line.product_id.standard_price or 0.0,
                     'origin': order.name,
                     'product_uom_qty': line.product_qty
                 }
@@ -207,7 +207,7 @@ class PurchaseSubcontracting(models.Model):
                 'partner_id': order.partner_id.id,
                 'state': 'confirmed',
                 'company_id': self.env.user.company_id.id,
-                'price_unit': order.product_id.standard_price or 0.0,
+                #'price_unit': order.product_id.standard_price or 0.0,
                 'origin': order.name,
                 'product_uom_qty': order.quantity,
                 'purchase_line_id': purchase_rec_line.id
