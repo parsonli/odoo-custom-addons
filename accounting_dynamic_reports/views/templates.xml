@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript"
+                        src="/accounting_dynamic_reports/static/src/js/report_view.js"></script>
+                <script type="text/javascript"
+                        src="/accounting_dynamic_reports/static/src/js/report_view_horizontal.js"></script>
+                <link rel="stylesheet"
+                      href="/accounting_dynamic_reports/static/src/css/reports.css"
+                      id="reports-stylesheet"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

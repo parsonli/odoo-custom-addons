@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dynamic_rep_wiz,dynamic_rep,model_new_accounting_report,,1,1,1,1
+access_financial_report1,account_fin_rep1,model_account_financial_report,account.group_account_user,1,1,1,1
+access_financial_report2,account_fin_rep2,model_account_financial_report,account.group_account_manager,1,1,1,1
+access_financial_report3,account_fin_rep3,model_account_financial_report,account.group_account_invoice,1,0,0,0

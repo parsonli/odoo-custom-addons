@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <!--Template for vertical type reports-->
+    <t t-name="report_financial">
+        <div class="main_report">
+            <div class="report_header">
+                <h1>
+                    <span t-esc="heading"/>
+                </h1>
+                <p>
+                    <span t-esc="date_str"/>
+                </p>
+            </div>
+            <div class="report-content" style="width:100%;">
+                <table class="vertical_report">
+                    <thead t-if="debit_credit==true" class="vertical-thead">
+                        <tr style="height:38px;">
+                            <th></th>
+                            <th style="border-bottom: 1px solid #e6e6e6;">
+                                Debit
+                            </th>
+                            <th style="border-bottom: 1px solid #e6e6e6;">
+                                Credit
+                            </th>
+                            <th style="border-bottom: 1px solid #e6e6e6;">
+                                Balance
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="categ" style="width:100%;">
+                        <t t-foreach="first_childs" t-as="child">
+                            <t t-if="child['type']=='account'">
+                                <t t-set="line_id" t-value="child['a_id']"/>
+                            </t>
+                            <t t-if="child['type']!='account'">
+                                <t t-set="line_id" t-value="child['id']"/>
+                            </t>
+                            <tr t-if="debit_credit==false"
+                                t-att-id='line_id'
+                                class="child_row">
+                                <td t-att-data-id='line_id'
+                                    t-att-data-type="child['type']"
+                                    class="child_col_name"
+                                    style="font-size:20px;font-weight: bold;width:40%;padding-left:14px !important;">
+                                    <span t-esc="child['name']"/>
+                                </td>
+                                <td t-att-data-id='line_id'
+                                    t-att-data-type="child['type']"
+                                    class="child_col_bal"/>
+                                <td t-att-data-id='line_id'
+                                    class="child_col_bal"
+                                    t-att-data-type="child['type']">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="child['balance_r']"/>
+                                </td>
+                            </tr>
+                            <tr t-if="debit_credit==true"
+                                t-att-id='line_id'
+                                class="child_row">
+                                <td t-att-data-id='line_id'
+                                    t-att-data-type="child['type']"
+                                    class="child_col_name"
+                                    style="font-size:20px;font-weight: bold;width:40%;padding-left:14px !important;">
+                                    <span t-esc="child['name']"/>
+                                </td>
+                                <td t-att-data-id='line_id'
+                                    t-att-data-type="child['type']"
+                                    class="child_col_bal">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="child['debit_r']"/>
+                                </td>
+                                <td t-att-data-id='line_id'
+                                    t-att-data-type="child['type']"
+                                    class="child_col_bal">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="child['credit_r']"/>
+                                </td>
+                                <td t-att-data-id='line_id'
+                                    class="child_col_bal"
+                                    t-att-data-type="child['type']">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="child['balance_r']"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </t>
+
+    <!--Template for horizontal type reports-->
+    <t t-name="report_financial_horizontal">
+        <div class="main_report">
+            <div class="report_header">
+                <h1>
+                    <span t-esc="parent['name']"/>
+                </h1>
+                <p>
+                    <span t-esc="date_str"/>
+                </p>
+            </div>
+            <div style="border: 1px solid;width:100%;height:auto;overflow:auto;">
+                <div class="report-content_left"
+                     style="width:50%;float:left;margin-top:10px;">
+                    <table class="horizontal_report_left"
+                           style="width:99%;margin-left:7px;">
+                        <thead t-if="debit_credit==true"
+                               class="vertical-thead">
+                            <tr style="height:38px;">
+                                <th></th>
+                                <th style="border-bottom: 1px solid #e6e6e6;">
+                                    Debit
+                                </th>
+                                <th style="border-bottom: 1px solid #e6e6e6;">
+                                    Credit
+                                </th>
+                                <th style="border-bottom: 1px solid #e6e6e6;">
+                                    Balance
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="categ"
+                               style="width:100%;">
+                            <tr t-if="debit_credit==true"
+                                t-att-id='data_id_left'
+                                style="width:100%;">
+                                <td t-att-data-id='data_id_left'
+                                    t-att-data-type="left['type']"
+                                    style="font-size:15px;font-weight: bold;width:30%;padding-left:14px !important;">
+                                    <span t-esc="left['name']"/>
+                                </td>
+                                <td t-att-data-id='data_id_left'
+                                    data-type='report'
+                                    style="font-size:15px;">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="left['debit_r']"/>
+                                </td>
+                                <td t-att-data-id='data_id_left'
+                                    data-type='report'
+                                    style="font-size:15px;">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="left['credit_r']"/>
+                                </td>
+                                <td t-att-data-id='data_id_left'
+                                    data-type='report'
+                                    style="font-size:15px;">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="left['balance_r']"/>
+                                </td>
+                            </tr>
+                            <tr t-if="debit_credit==false"
+                                t-att-id='data_id_left'
+                                style="width:100%;">
+                                <td t-att-data-id='data_id_left'
+                                    t-att-data-type="left['type']"
+                                    style="font-size:15px;font-weight: bold;width:40%;padding-left:14px !important;">
+                                    <span t-esc="left['name']"/>
+                                </td>
+                                <td t-att-data-id='data_id_left'
+                                    data-type='report'
+                                    style="width:25%;"/>
+                                <td t-att-data-id='data_id_left'
+                                    data-type='report'
+                                    style="font-size:15px;width:25%;">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="left['balance_r']"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="report-content_right"
+                     style="width:50%;float:left;margin-top:10px;">
+                    <table class="horizontal_report_right"
+                           style="width:99%;margin-left:7px;">
+                        <thead t-if="debit_credit==true"
+                               class="vertical-thead">
+                            <tr style="height:38px;">
+                                <th></th>
+                                <th style="border-bottom: 1px solid #e6e6e6;">
+                                    Debit
+                                </th>
+                                <th style="border-bottom: 1px solid #e6e6e6;">
+                                    Credit
+                                </th>
+                                <th style="border-bottom: 1px solid #e6e6e6;">
+                                    Balance
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="categ"
+                               style="width:100%;">
+                            <tr t-if="debit_credit==true"
+                                t-att-id='data_id_right'
+                                style="width:100%;">
+                                <td t-att-data-id='data_id_right'
+                                    t-att-data-type="right['type']"
+                                    style="font-size:15px;font-weight: bold;width:40%;padding-left:14px !important;">
+                                    <span t-esc="right['name']"/>
+                                </td>
+                                <td t-att-data-id='data_id_right'
+                                    data-type='report'
+                                    style="font-size:15px;">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="right['debit_r']"/>
+                                </td>
+                                <td t-att-data-id='data_id_right'
+                                    data-type='report'
+                                    style="font-size:15px;">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="right['credit_r']"/>
+                                </td>
+                                <td t-att-data-id='data_id_right'
+                                    data-type='report'
+                                    style="font-size:15px;">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="right['balance_r']"/>
+                                </td>
+                            </tr>
+                            <tr t-if="debit_credit==false"
+                                t-att-id='data_id_right'
+                                style="width:100%;">
+                                <td t-att-data-id='data_id_right'
+                                    t-att-data-type="right['type']"
+                                    style="font-size:15px;font-weight: bold;width:40%;padding-left:14px !important;">
+                                    <span t-esc="right['name']"/>
+                                </td>
+                                <td t-att-data-id='data_id_right'
+                                    data-type='report'
+                                    style="width:25%;"/>
+                                <td t-att-data-id='data_id_right'
+                                    data-type='report'
+                                    style="font-size:15px;width:25%;">
+                                    <span t-esc="currency"/>
+                                    <span t-esc="right['balance_r']"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

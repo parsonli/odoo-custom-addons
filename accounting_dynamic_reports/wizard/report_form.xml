@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="financial_report_wiz_modified" model="ir.ui.view">
+            <field name="name">financial.report.extended.wiz</field>
+            <field name="model">new.accounting.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <label for="account_report_id"/>
+                    <field name="account_report_id"
+                           domain="[('parent_id','=',False)]"/>
+                    <group>
+                        <group string="Dates">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group>
+                            <field name="target_move" widget="radio"/>
+                            <field name="view_format" widget="radio"/>
+                            <field name="enable_filter" invisible="1"/>
+                            <field name="debit_credit"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button string="View" name="view_report" type="object"
+                                class="btn-primary"/>
+                        <button string="Discard" class="btn-default"
+                                special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_new_reports" model="ir.actions.act_window">
+            <field name="name">Dynamic Reports</field>
+            <field name="res_model">new.accounting.report</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="financial_report_wiz_modified"/>
+        </record>
+        <menuitem name="Dynamic Reports"
+                  id="new_reports"
+                  action="action_new_reports"
+                  parent="account.menu_finance_reports"
+        />
+    </data>
+</odoo>

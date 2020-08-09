@@ -1,0 +1,1096 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_standard_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-07 19:52+0000\n"
+"PO-Revision-Date: 2020-01-14 14:04+0800\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: zh_CN\n"
+"X-Generator: Poedit 2.2.4\n"
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__summary
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__summary
+msgid ""
+" * Check : generate a trial balance.\n"
+" * Uncheck : detail report.\n"
+msgstr ""
+" * 勾选 : 试算平衡.\n"
+" * 不勾选 : 详细报告.\n"
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__init_balance_history
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__init_balance_history
+msgid ""
+" * Check this box if you need to report all the debit and the credit sum before the Start Date.\n"
+" * Uncheck this box to report only the balance before the Start Date\n"
+msgstr ""
+" * 勾选 : 显示期初数的借贷明细\n"
+" * 不勾选 : 只显示期初数的余额\n"
+"\n"
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__ledger_type
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__ledger_type
+msgid ""
+" * General Ledger : Journal entries group by account\n"
+" * Partner Leger : Journal entries group by partner, with only payable/recevable accounts\n"
+" * Journal Ledger : Journal entries group by journal, without initial balance\n"
+" * Open Ledger : Openning journal at Start date\n"
+msgstr ""
+" * 总账 : 按科目分类\n"
+" * 业务伙伴分类账 : 按业务伙伴分类，只显示 应收/应付 科目\n"
+" * 日记账 : 按日记账分类，不显示期初余额\n"
+" * 未决算分类账 : 未决算的分类账\n"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/wizard/account_standard_report.py:975
+#, python-format
+msgid " Balance"
+msgstr " 余额"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:210
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:416
+#, python-format
+msgid " Totals"
+msgstr " 合计"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:70
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:155
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "0-30"
+msgstr "0-30"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "01 Junary"
+msgstr "1月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "02 Febuary"
+msgstr "2月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "03 March"
+msgstr "3月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "04 April"
+msgstr "4月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "05 May"
+msgstr "5月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "06 June"
+msgstr "6月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "07 Jully"
+msgstr "7月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "08 August"
+msgstr "8月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "09 September"
+msgstr "9月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "10 October"
+msgstr "10月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "11 November"
+msgstr "11月"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,month_selec:0
+msgid "12 December"
+msgstr "12月"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__age_120_days
+msgid "120 days"
+msgstr "120天"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:73
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:158
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "30-60"
+msgstr "30-60"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__age_30_days
+msgid "30 days"
+msgstr "30天"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:76
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:161
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "60-90"
+msgstr "60-90"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__age_60_days
+msgid "60 days"
+msgstr "60天"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:79
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:164
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "90-120"
+msgstr "90-120"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__age_90_days
+msgid "90 days"
+msgstr "90天"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+msgid "<strong>Company:</strong>"
+msgstr "<strong>公司:</strong>"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+msgid "<strong>Devise:</strong>"
+msgstr "<strong>设计:</strong>"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+msgid "<strong>End Date :</strong>"
+msgstr "<strong>结束日期:</strong>"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+msgid "<strong>Start Date :</strong>"
+msgstr "<strong>开始日期:</strong>"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+msgid "<strong>Target Moves:</strong>"
+msgstr "<strong>已过账分录/所有分录 :</strong>"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,report_type:0
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:134
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:344
+#: model:ir.model,name:account_standard_report.model_account_account
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__account_ids
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__account_id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__account_id
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Account"
+msgstr "科目"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:137
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:347
+#, python-format
+msgid "Account Name"
+msgstr "科目名称"
+
+#. module: account_standard_report
+#: model:ir.model,name:account_standard_report.model_account_report_standard_ledger_line
+msgid "Account Standard Ledger Line"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model,name:account_standard_report.model_account_report_standard_ledger_report_object
+msgid "Account Standard Ledger Object"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model,name:account_standard_report.model_account_report_standard_ledger_periode
+msgid "Account Standard Ledger Periode"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model,name:account_standard_report.model_account_report_standard_ledger_report
+msgid "Account Standard Ledger Report"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model,name:account_standard_report.model_account_report_template
+msgid "Account Standard Ledger Template"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model,name:account_standard_report.model_account_report_standard_ledger
+msgid "Account Standard Ledger Wizard"
+msgstr ""
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_ledger_line_form
+msgid "Accounting Documents"
+msgstr "财务文件"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__account_in_ex_clude_ids
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__account_in_ex_clude_ids
+msgid "Accounts"
+msgstr "科目"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,ledger_type:0
+#: selection:account.report.template,ledger_type:0
+#: code:addons/account_standard_report/wizard/account_standard_report.py:31
+#, python-format
+msgid "Aged Balance"
+msgstr "应收/应付账龄表"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,target_move:0
+#: selection:account.report.template,target_move:0
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:50
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "All Entries"
+msgstr "所有分录"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,target_move:0
+#: selection:account.report.template,target_move:0
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:50
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "All Posted Entries"
+msgstr "已过账分录"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+msgid "Ammount Currency"
+msgstr "货币金额"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_ledger_line_form
+msgid "Amount"
+msgstr "金额"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:377
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__amount_currency
+#, python-format
+msgid "Amount Currency"
+msgstr "货币金额"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,report_type:0
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:350
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Analytic"
+msgstr "分析"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__analytic_account_id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__analytic_account_id
+msgid "Analytic Account"
+msgstr "分析账户"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__analytic_account_select_ids
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__analytic_account_select_ids
+msgid "Analytic Accounts"
+msgstr "分析标签"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,ledger_type:0
+#: selection:account.report.template,ledger_type:0
+#: code:addons/account_standard_report/wizard/account_standard_report.py:36
+#, python-format
+msgid "Analytic Ledger"
+msgstr "分析标签"
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__periode_date
+msgid "Auto complete Start and End date."
+msgstr "自动填充开始和结束日期."
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:374
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__balance
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Balance"
+msgstr "余额"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+msgid "Compact"
+msgstr "紧凑的日记账"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__compact_account
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__compact_account
+msgid "Compacte account."
+msgstr "科目压缩显示."
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_account__compacted
+msgid "Compacte entries."
+msgstr "日志简介."
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger.line,line_type:0
+msgid "Compacted"
+msgstr "科目压缩显示"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__company_id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__company_id
+msgid "Company"
+msgstr "公司"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__company_currency_id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__company_currency_id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__company_currency_id
+msgid "Company Currency"
+msgstr "公司货币"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:42
+#, python-format
+msgid "Company:"
+msgstr "公司:"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__create_uid
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__create_uid
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_periode__create_uid
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__create_uid
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__create_uid
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__create_uid
+msgid "Created by"
+msgstr "创建人"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__create_date
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__create_date
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_periode__create_date
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__create_date
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__create_date
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__create_date
+msgid "Created on"
+msgstr "创建日期"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:371
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__credit
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Credit"
+msgstr "贷方"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__cumul_balance
+msgid "Cumul Balance"
+msgstr "余额"
+
+#. module: account_standard_report
+#: model:ir.model,name:account_standard_report.model_res_currency
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__currency_id
+msgid "Currency"
+msgstr "币种"
+
+#. module: account_standard_report
+#: selection:account.account,type_third_parties:0
+msgid "Customer"
+msgstr "客户"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,result_selection:0
+#: selection:account.report.template,result_selection:0
+msgid "Customers"
+msgstr "客户"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,result_selection:0
+#: selection:account.report.template,result_selection:0
+msgid "Customers and Suppliers"
+msgstr "客户和供应商"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:128
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:338
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__date
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Date"
+msgstr "日期"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_periode__date_from
+msgid "Date from"
+msgstr "开始日期"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_periode__date_to
+msgid "Date to"
+msgstr "结束日期"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_ledger_line_form
+msgid "Dates"
+msgstr "月份"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:368
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__debit
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Debit"
+msgstr "借方"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__display_name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__display_name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_periode__display_name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__display_name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__display_name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__display_name
+#: model:ir.model.fields,field_description:account_standard_report.field_report_account_standard_report_report_account_standard_excel__display_name
+msgid "Display Name"
+msgstr "名称"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:149
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:365
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__date_maturity
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Due Date"
+msgstr "到期日期"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__date_to
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__date_to
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__date_to
+msgid "End Date"
+msgstr "结束日期"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:47
+#, python-format
+msgid "End Date : %s "
+msgstr "结束日期 : %s "
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__move_id
+msgid "Entrie"
+msgstr "日记账分录"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_view
+msgid "Excel File"
+msgstr "导出 Excel"
+
+#. module: account_standard_report
+#: model:ir.actions.report,name:account_standard_report.action_standard_excel
+msgid "Excel Report"
+msgstr "Excel 报告"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_res_currency__excel_format
+msgid "Excel format"
+msgstr "Excel 格式"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,account_methode:0
+#: selection:account.report.template,account_methode:0
+msgid "Exclude"
+msgstr "排除"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,ledger_type:0
+#: selection:account.report.template,ledger_type:0
+#: code:addons/account_standard_report/wizard/account_standard_report.py:11
+#, python-format
+msgid "General Ledger"
+msgstr "总账"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__group_by_key
+msgid "Group By Key"
+msgstr "按 KEY 分类"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_periode__id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__id
+#: model:ir.model.fields,field_description:account_standard_report.field_report_account_standard_report_report_account_standard_excel__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+msgid "INIT"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__account_in_ex_clude_ids
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__account_in_ex_clude_ids
+msgid "If empty, get all accounts"
+msgstr "空值：显示所有科目"
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__partner_select_ids
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__partner_select_ids
+msgid "If empty, get all partners"
+msgstr "空值：显示所有业务伙伴"
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_account__compacted
+msgid "If flagged, no details will be displayed in the Standard report, only compacted amounts."
+msgstr "勾选：不显示科目明细，只显示余额数."
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,account_methode:0
+#: selection:account.report.template,account_methode:0
+msgid "Include"
+msgstr "包括"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_ledger_line_form
+msgid "Information"
+msgstr "信息"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger.line,view_type:0
+msgid "Init"
+msgstr "期初数"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger.line,line_type:0
+msgid "Initial"
+msgstr "期初数"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__init_balance_history
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__init_balance_history
+msgid "Initial balance with history."
+msgstr "上期余额."
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger.line,line_type:0
+msgid "Init Line"
+msgstr "上期余额"
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__amount_currency
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__amount_currency
+msgid "It adds the currency column on report if the currency differs from the company currency."
+msgstr ""
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:131
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:341
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "JRNL"
+msgstr ""
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,report_type:0
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__journal_id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__journal_id
+msgid "Journal"
+msgstr "日记账"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_ledger_line_form
+msgid "Journal Item"
+msgstr "日记账项目"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_ledger_line_search_view
+msgid "Journal Items"
+msgstr "日记账项目"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,ledger_type:0
+#: selection:account.report.template,ledger_type:0
+#: code:addons/account_standard_report/wizard/account_standard_report.py:21
+#, python-format
+msgid "Journal Ledger"
+msgstr "日记账"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:140
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:353
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Journal entries"
+msgstr "日记账日志"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__journal_ids
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__journal_ids
+msgid "Journals"
+msgstr "日记账"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger____last_update
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line____last_update
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_periode____last_update
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report____last_update
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object____last_update
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template____last_update
+#: model:ir.model.fields,field_description:account_standard_report.field_report_account_standard_report_report_account_standard_excel____last_update
+msgid "Last Modified on"
+msgstr "最后编辑日"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__write_uid
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__write_uid
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_periode__write_uid
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__write_uid
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__write_uid
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__write_uid
+msgid "Last Updated by"
+msgstr "最后更新人"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__write_date
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__write_date
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_periode__write_date
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__write_date
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__write_date
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__write_date
+msgid "Last Updated on"
+msgstr "最后更新日"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger.line,line_type:0
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__line_ids
+msgid "Line"
+msgstr "日志"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__line_super_total_id
+msgid "Line Super Total"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__line_total_ids
+msgid "Line Total"
+msgstr ""
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:173
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:380
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__full_reconcile_id
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Match."
+msgstr "匹配."
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_ledger_line_form
+msgid "Matching"
+msgstr "匹配"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__account_methode
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__account_methode
+msgid "Methode"
+msgstr "方法"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__month_selec
+msgid "Month"
+msgstr "会计月份"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__move_line_id
+msgid "Move Line"
+msgstr "移动日志"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:359
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_periode__name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__name
+#, python-format
+msgid "Name"
+msgstr "名称"
+
+#. module: account_standard_report
+#: selection:account.account,type_third_parties:0
+msgid "No"
+msgstr ""
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger.line,view_type:0
+msgid "Normal"
+msgstr "正常"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:67
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:152
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Not Due"
+msgstr "未到期"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__current
+msgid "Not due"
+msgstr "未到期"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_view
+msgid "OPEN TEMPLATES"
+msgstr "打开模板"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__object_id
+msgid "Object"
+msgstr "项目"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:82
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:167
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__older
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Older"
+msgstr "更早的"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:52
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Only UnReconciled Entries"
+msgstr "只显示未调价日志"
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__reconciled
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__reconciled
+msgid ""
+"Only for entrie with a payable/receivable account.\n"
+" * Check this box to see un-reconcillied and reconciled entries with payable.\n"
+" * Uncheck to see only un-reconcillied entries. Can be use only with parnter ledger.\n"
+msgstr ""
+"仅限于应收/应付科目的日志.\n"
+" * 勾选：显示所有日志.\n"
+" * 不勾选：显示未验证日志.\n"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,ledger_type:0
+#: selection:account.report.template,ledger_type:0
+#: code:addons/account_standard_report/wizard/account_standard_report.py:26
+#, python-format
+msgid "Open Ledger"
+msgstr "未过账分类账"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_ledger_line_form
+msgid "Other"
+msgstr "其他"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,report_type:0
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:146
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:362
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__partner_id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__partner_id
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Partner"
+msgstr "业务伙伴"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,ledger_type:0
+#: selection:account.report.template,ledger_type:0
+#: code:addons/account_standard_report/wizard/account_standard_report.py:16
+#, python-format
+msgid "Partner Ledger"
+msgstr "业务伙伴分类账"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__partner_select_ids
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__partner_select_ids
+msgid "Partners"
+msgstr "业务伙伴"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__result_selection
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__result_selection
+msgid "Partners Selection"
+msgstr "选择业务伙伴"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__partner_ids
+msgid "Partners in report"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__periode_date
+msgid "Periode"
+msgstr "会计期间"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_view
+msgid "Print PDF"
+msgstr "打印 PDF"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__print_time
+msgid "Print Time"
+msgstr ""
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:44
+#, python-format
+msgid "Print on %s"
+msgstr "打印日期 %s"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__reconciled
+msgid "Reconciled"
+msgstr "验证"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:143
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:356
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "Ref"
+msgstr "参考"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__report_id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__report_id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report_object__report_id
+msgid "Report"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__report_name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__report_name
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__report_name
+msgid "Report Name"
+msgstr "报告名称"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__report_object_id
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__report_object_ids
+msgid "Report Object"
+msgstr ""
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_view
+msgid "Report Options"
+msgstr "报告选项"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__report_type
+msgid "Report Type"
+msgstr "报告类型"
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_view
+msgid "SAVE"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__journal_ids
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__journal_ids
+msgid "Select journal, for the Open Ledger you need to set all journals."
+msgstr "选择所有日志显示未验证分类账."
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_template_form_view
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_template_tree_view
+msgid "Standard Ledger Template"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.actions.act_window,name:account_standard_report.action_account_standard_report
+#: model:ir.actions.act_window,name:account_standard_report.action_account_standard_report_template
+#: model:ir.actions.report,name:account_standard_report.action_standard_report
+#: model:ir.ui.menu,name:account_standard_report.menu_account_standard_report
+msgid "Standard Report"
+msgstr "财务报表"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__date_from
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_report__date_from
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__date_from
+msgid "Start Date"
+msgstr "开始日期"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:46
+#, python-format
+msgid "Start Date : %s "
+msgstr "开始日期 : %s "
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger.line,line_type:0
+msgid "Super Total"
+msgstr ""
+
+#. module: account_standard_report
+#: selection:account.account,type_third_parties:0
+msgid "Supplier"
+msgstr "供应商"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger,result_selection:0
+#: selection:account.report.template,result_selection:0
+msgid "Suppliers"
+msgstr "供应商"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__target_move
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__target_move
+msgid "Target Moves"
+msgstr "已过账分录/所有分录"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:49
+#, python-format
+msgid "Target Moves:"
+msgstr "已过账分录/所有分录:"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__template_id
+msgid "Template"
+msgstr "模板"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/wizard/account_standard_report.py:1089
+#, python-format
+msgid "Template of %s"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_account__type_third_parties
+msgid "Third Partie"
+msgstr "第三方插件：财务报表"
+
+#. module: account_standard_report
+#: selection:account.report.standard.ledger.line,line_type:0
+#: selection:account.report.standard.ledger.line,view_type:0
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:85
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:170
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.view_account_report_standard_ledger_line_tree
+#: model_terms:ir.ui.view,arch_db:account_standard_report.view_aged_tree
+#, python-format
+msgid "Total"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__summary
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__summary
+msgid "Trial Balance"
+msgstr "试算平衡"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__ledger_type
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__line_type
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__ledger_type
+msgid "Type"
+msgstr "选择"
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__date_from
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger_report__date_from
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__date_from
+msgid "Use to compute initial balance."
+msgstr "用于计算上期余额."
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__date_to
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger_report__date_to
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__date_to
+msgid "Use to compute the entrie matched with futur."
+msgstr "用于匹配."
+
+#. module: account_standard_report
+#: model:ir.model.fields,help:account_standard_report.field_account_report_standard_ledger__company_currency_id
+#: model:ir.model.fields,help:account_standard_report.field_account_report_template__company_currency_id
+msgid "Utility field to express amount currency"
+msgstr ""
+
+#. module: account_standard_report
+#: model_terms:ir.ui.view,arch_db:account_standard_report.account_report_standard_view
+msgid "View Lines"
+msgstr "预览"
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger_line__view_type
+msgid "View Type"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__amount_currency
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__amount_currency
+msgid "With Currency"
+msgstr ""
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/report/report_account_standard_excel.py:52
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_standard_ledger__reconciled
+#: model:ir.model.fields,field_description:account_standard_report.field_account_report_template__reconciled
+#: model_terms:ir.ui.view,arch_db:account_standard_report.report_account_standard_report
+#, python-format
+msgid "With Reconciled Entries"
+msgstr "已验证日志"
+
+#. module: account_standard_report
+#: code:addons/account_standard_report/wizard/account_standard_report.py:342
+#, python-format
+msgid "Your are not an accountant."
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model,name:account_standard_report.model_report_account_standard_report_report_account_standard_excel
+msgid "report.account_standard_report.report_account_standard_excel"
+msgstr ""
+
+#. module: account_standard_report
+#: model:ir.model,name:account_standard_report.model_report_account_standard_report_report_account_standard_report
+msgid "report.account_standard_report.report_account_standard_report"
+msgstr ""
