@@ -161,10 +161,16 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='is_quantity_done_editable']" position="after">
-                <field name="price_unit"  required="1" attrs="{'readonly': [('state', '==', 'done')]}" groups="abs_hide_sale_cost_price.group_cost_price_show"/>
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="subcontract_id" invisible="1"/>
             </xpath>
-
+            <xpath expr="//field[@name='is_quantity_done_editable']" position="after">
+                <field name="price_unit"  required="1" attrs="{'readonly': [('state', '==', 'done')],'column_invisible': [('parent.subcontract_id', '=', False)]}" groups="abs_hide_sale_cost_price.group_cost_price_show"/>
+            </xpath>
+            <xpath expr="//notebook" position="after">
+                <separator string="1.委外加工完成的成品，需要填入手工计算的价格" attrs="{'invisible': [('subcontract_id', '=', False)]}"/>
+                <separator string="2.委外加工发出的原材料，会自动抓取价格" attrs="{'invisible': [('subcontract_id', '=', False)]}"/>
+            </xpath>
         </field>
     </record>
 </odoo>
