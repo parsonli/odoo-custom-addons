@@ -47,6 +47,15 @@ class PurchaseSubcontracting(models.Model):
     _description = "Subcontracting Order"
     _order = 'date_order desc, id desc'
 
+    def _get_product_price_unit(self):
+        for record in self:
+            record.product_price_unit = record.product_id.standard_price
+
+    def _check_price_unit(self):
+        for record in self:
+            if record.product_id:
+                record.check_price_unit = record.product_price_unit != 0
+
     name = fields.Char('Order Reference', required=True, index=True, copy=False, default='New')
     date_order = fields.Datetime('Order Date', required=True, index=True, copy=False,default=fields.Datetime.now,
                                  help="Depicts the date where the Quotation should be validated and converted into a purchase order.")
@@ -89,7 +98,8 @@ class PurchaseSubcontracting(models.Model):
     purchase_count = fields.Integer(string='Purchase', compute='_compute_purchase_ids')
     taxes_id = fields.Many2many('account.tax', string='税率',
                                 domain=['|', ('active', '=', False), ('active', '=', True)])
-
+    product_price_unit = fields.Float(string='单价', digits=dp.get_precision('Product Price'), compute='_get_product_price_unit')
+    check_price_unit = fields.Boolean(compute='_check_price_unit')
     @api.multi
     def unlink(self):
         for order in self:
@@ -207,7 +217,7 @@ class PurchaseSubcontracting(models.Model):
                 'partner_id': order.partner_id.id,
                 'state': 'confirmed',
                 'company_id': self.env.user.company_id.id,
-                #'price_unit': order.product_id.standard_price or 0.0,
+                'price_unit': order.product_id.standard_price or 0,
                 'origin': order.name,
                 'product_uom_qty': order.quantity,
                 'purchase_line_id': purchase_rec_line.id
@@ -278,12 +288,23 @@ class PurchaseSubcontracting(models.Model):
             action['res_id'] = purchases.id
         return action
 
+
 class PurchaseSubcontractingLine(models.Model):
     _name = 'purchase.subcontract.line'
     _description = 'Subcontract Order Line'
     _order = 'order_id, id'
 
+    def _get_price_unit(self):
+        for line in self:
+            line.price_unit = line.product_id.standard_price
+
+    def get_total_price(self):
+        for line in self:
+            line.total_price = line.product_qty * line.price_unit
+
     order_id = fields.Many2one('purchase.subcontract.order', string='Order Reference', index=True, required=True, ondelete='cascade')
     product_id = fields.Many2one('product.product', string='Product', change_default=True, required=True)
     product_uom_id = fields.Many2one('uom.uom', 'UOM', related='product_id.uom_id', readonly=True)
     product_qty = fields.Float(string='Quantity', required=True)
+    price_unit = fields.Float(string='单价', digits=dp.get_precision('Product Price'), compute='_get_price_unit')
+    total_price = fields.Float(string='小计', compute='get_total_price')
