@@ -14,7 +14,7 @@ class StockMove(models.Model):
 
     def _get_price_unit(self):
         """ Returns the unit price to store on the quant """
-        return not self.company_id.currency_id.is_zero(self.price_unit) and self.price_unit or self.production_id.bom_price
+        return not self.company_id.currency_id.is_zero(self.price_unit) and self.price_unit or self.production_id.bom_price or self.product_id.standard_price
 
 
 class MrpProduction(models.Model):
