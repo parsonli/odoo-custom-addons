@@ -147,18 +147,18 @@ odoo.define('accounting_dynamic_reports.MyReportHorizontal', function (require) 
                 //add balance with debit/credit columns
                 if (this.form.debit_credit == true) {
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['debit'].toFixed(2)
+                        this.currency + " " + rec['debit'].toLocaleString("zh-CN")
                         + "</td>";
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['credit'].toFixed(2)
+                        this.currency + " " + rec['credit'].toLocaleString("zh-CN")
                         + "</td>";
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['balance'].toFixed(2)
+                        this.currency + " " + rec['balance'].toLocaleString("zh-CN")
                         + "</td><td class='child_col_bal' " + attr_bal + "></td></tr>";
                 }
                 else {
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['balance'].toFixed(2)
+                        this.currency + " " + rec['balance'].toLocaleString("zh-CN")
                         + "</td><td class='child_col_bal' " + attr_bal + "></td></tr>";
                 }
             }
@@ -173,19 +173,19 @@ odoo.define('accounting_dynamic_reports.MyReportHorizontal', function (require) 
                 //add balance with debit/credit columns
                 if (this.form.debit_credit == true) {
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['debit'].toFixed(2)
+                        this.currency + " " + rec['debit'].toLocaleString("zh-CN")
                         + "</td>";
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['credit'].toFixed(2)
+                        this.currency + " " + rec['credit'].toLocaleString("zh-CN")
                         + "</td>";
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['balance'].toFixed(2)
+                        this.currency + " " + rec['balance'].toLocaleString("zh-CN")
                         + "</td><td class='child_col_bal' " + attr_bal + "></td></tr>";
                 }
                 else {
                     temp_str += "<td class='child_col_bal' " + attr_bal + "></td>" +
                         "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['balance'].toFixed(2)
+                        this.currency + " " + rec['balance'].toLocaleString("zh-CN")
                         + "</td></tr>";
                 }
             }
