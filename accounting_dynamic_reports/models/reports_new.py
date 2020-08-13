@@ -32,7 +32,7 @@ class AccountCommonReportNew(models.TransientModel):
     view_format = fields.Selection([
         ('vertical', 'Vertical'),
         ('horizontal', 'Horizontal')],
-        default='vertical',
+        default='horizontal',
         string="Format")
 
     @api.model
@@ -52,7 +52,7 @@ class AccountCommonReportNew(models.TransientModel):
         ('all', 'All'),
         ('posted', 'Posted')],
         string="Type",
-        default='all')
+        default='posted')
     account_report_id = fields.Many2one(
         'account.financial.report',
         string='Account Reports',
@@ -62,7 +62,7 @@ class AccountCommonReportNew(models.TransientModel):
     date_to = fields.Date(string='End Date')
     debit_credit = fields.Boolean(
         string='Display Debit/Credit Columns',
-        default=True,
+        default=False,
         help="This option allows you to"
              " get more details about the "
              "way your balances are computed."
