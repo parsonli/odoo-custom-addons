@@ -27,12 +27,12 @@
     border-bottom: 1px solid #e6e6e6;
 }
 .child_col_name{
-    width:30%;
+    width:25%;
 }
 .child_col_bal{
-    width:30%;
+    width:25%;
     padding: 0px !important;
-    text-align: "."
+    text-align: right;
 }
 .vertical_report tr{
 
@@ -74,4 +74,7 @@ table.vertical_report {
     border-right: 1px solid #e6e6e6;
 }.horizontal_report_right {
     border-left: 1px solid #e6e6e6;
+}
+.vertical-thead {
+    text-align: center;
 }

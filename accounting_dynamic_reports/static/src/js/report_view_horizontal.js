@@ -147,18 +147,18 @@ odoo.define('accounting_dynamic_reports.MyReportHorizontal', function (require) 
                 //add balance with debit/credit columns
                 if (this.form.debit_credit == true) {
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['debit'].toFixed(2).toLocaleString("zh-CN")
+                        this.currency + " " + rec['debit'].toLocaleString("zh-CN", {minimumFractionDigits:2})
                         + "</td>";
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['credit'].toFixed(2).toLocaleString("zh-CN")
+                        this.currency + " " + rec['credit'].toLocaleString("zh-CN", {minimumFractionDigits:2} )
                         + "</td>";
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['balance'].toFixed(2).toLocaleString("zh-CN")
+                        this.currency + " " + rec['balance'].toLocaleString("zh-CN", {minimumFractionDigits:2} )
                         + "</td></tr>";
                 }
                 else {
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['balance'].toFixed(2).toLocaleString("zh-CN")
+                        this.currency + " " + rec['balance'].toLocaleString("zh-CN", {minimumFractionDigits:2} )
                         + "</td></tr>";
                 }
             }
@@ -173,19 +173,19 @@ odoo.define('accounting_dynamic_reports.MyReportHorizontal', function (require) 
                 //add balance with debit/credit columns
                 if (this.form.debit_credit == true) {
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['debit'].toFixed(2).toLocaleString("zh-CN")
+                        this.currency + " " + rec['debit'].toLocaleString("zh-CN", {minimumFractionDigits:2} )
                         + "</td>";
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['credit'].toFixed(2).toLocaleString("zh-CN")
+                        this.currency + " " + rec['credit'].toLocaleString("zh-CN", {minimumFractionDigits:2} )
                         + "</td>";
                     temp_str += "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['balance'].toFixed(2).toLocaleString("zh-CN")
+                        this.currency + " " + rec['balance'].toLocaleString("zh-CN", {minimumFractionDigits:2} )
                         + "</td></tr>";
                 }
                 else {
                     temp_str += "<td class='child_col_bal' " + attr_bal + "></td>" +
                         "<td class='child_col_bal' " + attr_bal + " >" +
-                        this.currency + " " + rec['balance'].toFixed(2).toLocaleString("zh-CN")
+                        this.currency + " " + rec['balance'].toLocaleString("zh-CN", {minimumFractionDigits:2} )
                         + "</td></tr>";
                 }
             }
@@ -322,18 +322,18 @@ odoo.define('accounting_dynamic_reports.MyReportHorizontal', function (require) 
                 date_str += " to " + String(self.form['date_to']);
             }
             self.left['balance_r'] =
-                self.left['balance'] ? self.left['balance'].toLocaleString("zh-CN") : 0.00;
+                self.left['balance'] ? self.left['balance'].toLocaleString("zh-CN", {minimumFractionDigits:2} ) : 0.00;
             self.left['debit_r'] =
-                self.left['debit'] ? self.left['debit'].toLocaleString("zh-CN") : 0.00;
+                self.left['debit'] ? self.left['debit'].toLocaleString("zh-CN", {minimumFractionDigits:2} ) : 0.00;
             self.left['credit_r'] =
-                self.left['credit'] ? self.left['credit'].toLocaleString("zh-CN") : 0.00;
+                self.left['credit'] ? self.left['credit'].toLocaleString("zh-CN", {minimumFractionDigits:2} ) : 0.00;
 
             self.right['balance_r'] =
-                self.right['balance'] ? self.right['balance'].toLocaleString("zh-CN") : 0.00;
+                self.right['balance'] ? self.right['balance'].toLocaleString("zh-CN", {minimumFractionDigits:2} ) : 0.00;
             self.right['debit_r'] =
-                self.right['debit'] ? self.right['debit'].toLocaleString("zh-CN") : 0.00;
+                self.right['debit'] ? self.right['debit'].toLocaleString("zh-CN", {minimumFractionDigits:2} ) : 0.00;
             self.right['credit_r'] =
-                self.right['credit'] ? self.right['credit'].toLocaleString("zh-CN") : 0.00;
+                self.right['credit'] ? self.right['credit'].toLocaleString("zh-CN", {minimumFractionDigits:2} ) : 0.00;
 
             var $content = $(QWeb.render("report_financial_horizontal", {
                 parent: self.parent,
