@@ -57,25 +57,25 @@ class QualityAlert(models.Model):
 
     @api.multi
     def generate_tests(self):
-        # quality_measure = self.env['quality.measure']
-        # measures = quality_measure.search([('product_id', '=', self.product_id.id),
-        #                                    ('trigger_time', 'in', self.picking_id.picking_type_id.id)])
-        # for measure in measures:
-        #     self.env['quality.test'].create({
-        #         'quality_measure': measure.id,
-        #         'alert_id': self.id,
-        #     })
+        quality_measure = self.env['quality.measure']
+        measures = quality_measure.search([('product_id', '=', self.product_id.id),
+                                           ('trigger_time', 'in', self.picking_id.picking_type_id.id)])
+        for measure in measures:
+            self.env['quality.test'].create({
+                'quality_measure': measure.id,
+                'alert_id': self.id,
+            })
 
     @api.depends('tests', 'tests.test_status')
     def _compute_status(self):
-        # for alert in self:
-        #     failed_tests = [test for test in alert.tests if test.test_status == 'fail']
-        #     if not alert.tests:
-        #         alert.final_status = 'wait'
-        #     elif failed_tests:
-        #         alert.final_status = 'fail'
-        #     else:
-        #         alert.final_status = 'pass'
+        for alert in self:
+            failed_tests = [test for test in alert.tests if test.test_status == 'fail']
+            if not alert.tests:
+                alert.final_status = 'wait'
+            elif failed_tests:
+                alert.final_status = 'fail'
+            else:
+                alert.final_status = 'pass'
 
 
 class QualityTest(models.Model):
@@ -84,13 +84,11 @@ class QualityTest(models.Model):
     _inherit = ['mail.thread']
     _order = "id desc"
 
+    quality_measure = fields.Many2one('quality.measure', string='Measure', index=True, ondelete='cascade', track_visibility='onchange')
     alert_id = fields.Many2one('quality.alert', string="检测报告", track_visibility='onchange')
     name = fields.Char('Name', related="quality_measure.name", required=True)
     product_id = fields.Many2one('product.product', string='Product', related='alert_id.product_id')
     test_type = fields.Selection(related='quality_measure.type', string='Test Type', required=True, readonly=True)
-    quantity_min = fields.Float(related='quality_measure.quantity_min', string='Min-Value', store=True, readonly=True)
-    quantity_max = fields.Float(related='quality_measure.quantity_max', string='Max-Value', store=True, readonly=True)
-    test_user_id = fields.Many2one('res.users', string='Assigned to', track_visibility='onchange')
     test_result = fields.Float(string='Result', track_visibility='onchange')
     test_result2 = fields.Selection([
         ('satisfied', 'Satisfied'),
