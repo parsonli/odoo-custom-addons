@@ -126,7 +126,7 @@
                         </div>
                         <br/>
                         <p>
-                          <t t-if="o.backorder_ids and o.backorder_ids.filtered(lambda x: x.state not in ('done', 'cancel'))">
+                          <t t-if="o.backorder_ids and o.backorder_ids.filtered(lambda x: x.state not in ('done', 'cancel'))"><i class="fa fa-exclamation-triangle" />
                            您此次订单上的产品尚未全部运送完毕。如果您的所在仓库已经收到全部产品，请忽略此条消息！
                           </t>
                         </p>
