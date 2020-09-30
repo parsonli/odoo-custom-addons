@@ -57,25 +57,25 @@ class QualityAlert(models.Model):
 
     @api.multi
     def generate_tests(self):
-        quality_measure = self.env['quality.measure']
-        measures = quality_measure.search([('product_id', '=', self.product_id.id),
-                                           ('trigger_time', 'in', self.picking_id.picking_type_id.id)])
-        for measure in measures:
-            self.env['quality.test'].create({
-                'quality_measure': measure.id,
-                'alert_id': self.id,
-            })
+        # quality_measure = self.env['quality.measure']
+        # measures = quality_measure.search([('product_id', '=', self.product_id.id),
+        #                                    ('trigger_time', 'in', self.picking_id.picking_type_id.id)])
+        # for measure in measures:
+        #     self.env['quality.test'].create({
+        #         'quality_measure': measure.id,
+        #         'alert_id': self.id,
+        #     })
 
     @api.depends('tests', 'tests.test_status')
     def _compute_status(self):
-        for alert in self:
-            failed_tests = [test for test in alert.tests if test.test_status == 'fail']
-            if not alert.tests:
-                alert.final_status = 'wait'
-            elif failed_tests:
-                alert.final_status = 'fail'
-            else:
-                alert.final_status = 'pass'
+        # for alert in self:
+        #     failed_tests = [test for test in alert.tests if test.test_status == 'fail']
+        #     if not alert.tests:
+        #         alert.final_status = 'wait'
+        #     elif failed_tests:
+        #         alert.final_status = 'fail'
+        #     else:
+        #         alert.final_status = 'pass'
 
 
 class QualityTest(models.Model):
