@@ -1,8 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 quality_measure_all,quality.measure,model_quality_measure,base.group_user,1,0,0,0
 quality_measure_user,quality.measure,model_quality_measure,group_quality_user,1,1,1,1
-quality_alert_stock,quality.alert,model_quality_alert,group_stock_user,1,0,1,0
+quality_alert_stock,quality.alert,model_quality_alert,base.group_user,1,0,1,0
 quality_alert_user,quality.alert,model_quality_alert,group_quality_user,1,1,1,1
-quality_test_stock,quality.test,model_quality_test,group_stock_user,1,0,1,0
+quality_test_stock,quality.test,model_quality_test,base.group_user,1,0,1,0
 quality_test_all,quality.test,model_quality_test,group_quality_user,1,1,1,1
 quality_type_all,quality.type,model_quality_type,group_quality_user,1,1,1,1

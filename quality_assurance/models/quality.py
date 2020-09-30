@@ -40,7 +40,7 @@ class QualityAlert(models.Model):
     name = fields.Char('检测单号', required=True)
     date = fields.Datetime(string='日期', default=datetime.now(), track_visibility='onchange')
     product_id = fields.Many2one('product.product', string='产品变体', index=True)
-    picking_id = fields.Many2one('stock.picking', string='相关源单据')
+    picking_id = fields.Many2one('stock.picking', string='相关源单据', ondelete="cascade")
     origin = fields.Char(string='源单据',
                          help="Reference of the document that produced this alert.",
                          readonly=True)
@@ -48,12 +48,18 @@ class QualityAlert(models.Model):
                                  default=lambda self: self.env.user.company_id.id, index=1)
     user_id = fields.Many2one('res.users', string='创建人', default=lambda self: self.env.user.id)
     tests = fields.One2many('quality.test', 'alert_id', string="质检")
-    final_status = fields.Selection(compute="_compute_status",
-                                    selection=[('wait', '等待'),
-                                               ('pass', '通过'),
-                                               ('fail', '不合格')],
-                                    store=True, string='状态',
-                                    default='wait', track_visibility='onchange')
+    state = fields.Selection(selection=[('wait', '等待'),
+                                        ('pass', '通过'),
+                                        ('fail', '不合格')],
+                             string='状态', default='wait', track_visibility='onchange')
+
+    @api.multi
+    def btn_pass(self):
+        self.state = 'pass'
+
+    @api.multi
+    def btn_fail(self):
+        self.state = 'fail'
 
     @api.multi
     def generate_tests(self):
@@ -61,53 +67,25 @@ class QualityAlert(models.Model):
         measures = quality_measure.search([('product_id', '=', self.product_id.id),
                                            ('trigger_time', 'in', self.picking_id.picking_type_id.id)])
         for measure in measures:
-            self.env['quality.test'].create({
-                'quality_measure': measure.id,
-                'alert_id': self.id,
-            })
+            for type in measure.type:
+                self.env['quality.test'].create({
+                    'quality_measure': measure.id,
+                    'alert_id': self.id,
+                    'name': type.name,
+                    'test_type': type.measure,
 
-    @api.depends('tests', 'tests.test_status')
-    def _compute_status(self):
-        for alert in self:
-            failed_tests = [test for test in alert.tests if test.test_status == 'fail']
-            if not alert.tests:
-                alert.final_status = 'wait'
-            elif failed_tests:
-                alert.final_status = 'fail'
-            else:
-                alert.final_status = 'pass'
+                })
 
 
 class QualityTest(models.Model):
     _name = 'quality.test'
     _description = '检测报告明细'
-    _inherit = ['mail.thread']
     _order = "id desc"
 
     quality_measure = fields.Many2one('quality.measure', string='Measure', index=True, ondelete='cascade', track_visibility='onchange')
-    alert_id = fields.Many2one('quality.alert', string="检测报告", track_visibility='onchange')
-    name = fields.Char('Name', related="quality_measure.name", required=True)
-    product_id = fields.Many2one('product.product', string='Product', related='alert_id.product_id')
-    test_type = fields.Selection(related='quality_measure.type', string='Test Type', required=True, readonly=True)
-    test_result = fields.Float(string='Result', track_visibility='onchange')
-    test_result2 = fields.Selection([
-        ('satisfied', 'Satisfied'),
-        ('unsatisfied', 'Unsatisfied')], string='Result', track_visibility='onchange')
-    test_status = fields.Selection(compute="_compute_status",
-                                   selection=[('pass', 'Passed'),
-                                              ('fail', 'Failed')],
-                                   store=True, string='Status', track_visibility='onchange')
+    alert_id = fields.Many2one('quality.alert', string="检测报告",ondelete='cascade', track_visibility='onchange')
+    name = fields.Char('项目')
+    product_id = fields.Many2one('product.product', string='产品变体', related='alert_id.product_id')
+    test_type = fields.Char(string='标准')
+    test_result = fields.Char(string='结果')
 
-    @api.depends('test_result', 'test_result2')
-    def _compute_status(self):
-        for test in self:
-            if test.test_type == 'quantity':
-                if test.quantity_min <= test.test_result <= test.quantity_max:
-                    test.test_status = 'pass'
-                else:
-                    test.test_status = 'fail'
-            else:
-                if test.test_result2 == 'satisfied':
-                    test.test_status = 'pass'
-                else:
-                    test.test_status = 'fail'
