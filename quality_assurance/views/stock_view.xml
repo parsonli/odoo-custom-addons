@@ -12,7 +12,7 @@
                         icon="fa-check-circle-o">
                         <!--attrs="{'invisible':[('state','=','draft')),('alert_ids','=',[])]}">-->
 
-                        <field name="alert_count" widget="statinfo" string="Quality Alerts" help="Quality Alerts"/>
+                        <field name="alert_count" widget="statinfo" string="检测报告" help="原料入库的检测报告"/>
                         <field name="alert_ids" invisible="1"/>
                     </button>
                 </xpath>

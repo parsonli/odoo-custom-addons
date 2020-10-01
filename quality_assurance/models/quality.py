@@ -66,15 +66,20 @@ class QualityAlert(models.Model):
         quality_measure = self.env['quality.measure']
         measures = quality_measure.search([('product_id', '=', self.product_id.id),
                                            ('trigger_time', 'in', self.picking_id.picking_type_id.id)])
-        for measure in measures:
-            for type in measure.type:
-                self.env['quality.test'].create({
-                    'quality_measure': measure.id,
-                    'alert_id': self.id,
-                    'name': type.name,
-                    'test_type': type.measure,
+        res = []
+        for record in self.tests:
+            res.append(record.name)
 
-                })
+        for measure in measures:
+            for types in measure.type:
+                if types.name not in res:
+                    self.env['quality.test'].create({
+                        'quality_measure': measure.id,
+                        'alert_id': self.id,
+                        'name': types.name,
+                        'test_type': types.measure,
+
+                    })
 
 
 class QualityTest(models.Model):
