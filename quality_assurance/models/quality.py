@@ -35,7 +35,7 @@ class QualityAlert(models.Model):
     _name = 'quality.alert'
     _description = '检测报告'
     _inherit = ['mail.thread']
-    _order = "date asc, id desc"
+    _order = "id desc"
 
     name = fields.Char('检测单号', required=True, copy=False, readonly=True,
                        index=True, default=lambda self: _('New'))
@@ -94,7 +94,7 @@ class QualityAlert(models.Model):
 class QualityTest(models.Model):
     _name = 'quality.test'
     _description = '检测报告明细'
-    _order = "id desc"
+    _order = "id asc"
 
     quality_measure = fields.Many2one('quality.measure', string='Measure', index=True, ondelete='cascade', track_visibility='onchange')
     alert_id = fields.Many2one('quality.alert', string="检测报告",ondelete='cascade', track_visibility='onchange')
