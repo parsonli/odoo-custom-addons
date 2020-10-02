@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
 
 class ResPartner(models.Model):
@@ -57,7 +58,7 @@ class ResPartner(models.Model):
     parent_credit = fields.Monetary(compute=credit_from_parent, readonly='True')
 
 
-class OverCredit(models.Model):
+class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     # 计算是否超过信用额度
@@ -73,3 +74,10 @@ class OverCredit(models.Model):
 
     # bool用来控制是否显示确认按钮
     over_credit = fields.Boolean(compute=is_over_credit, readonly='True')
+
+    @api.multi
+    def action_invoice_create(self, grouped=False, final=False):
+        if self.env.user.company_id.id != self.company_id.id:
+            raise UserError(_("请切换公司后再创建发票"))
+        res = super(SaleOrder, self).action_invoice_create()
+        return res

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class QualityMeasure(models.Model):
@@ -37,7 +37,8 @@ class QualityAlert(models.Model):
     _inherit = ['mail.thread']
     _order = "date asc, id desc"
 
-    name = fields.Char('检测单号', required=True)
+    name = fields.Char('检测单号', required=True, copy=False, readonly=True,
+                       index=True, default=lambda self: _('New'))
     date = fields.Datetime(string='日期', default=datetime.now(), track_visibility='onchange')
     product_id = fields.Many2one('product.product', string='产品变体', index=True)
     picking_id = fields.Many2one('stock.picking', string='相关源单据', ondelete="cascade")
@@ -52,6 +53,14 @@ class QualityAlert(models.Model):
                                         ('pass', '通过'),
                                         ('fail', '不合格')],
                              string='状态', default='wait', track_visibility='onchange')
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', _('New')) == _('New'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('quality.alert') or _('New')
+
+        result = super(QualityAlert, self).create(vals)
+        return result
 
     @api.multi
     def btn_pass(self):
