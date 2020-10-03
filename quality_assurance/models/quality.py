@@ -42,6 +42,7 @@ class QualityAlert(models.Model):
     date = fields.Datetime(string='日期', default=datetime.now(), track_visibility='onchange')
     product_id = fields.Many2one('product.product', string='产品变体', index=True)
     picking_id = fields.Many2one('stock.picking', string='相关源单据', ondelete="cascade")
+    mrp_production_id = fields.Many2one('mrp.production', string='相关源单据', ondelete="cascade")
     origin = fields.Char(string='源单据',
                          help="Reference of the document that produced this alert.",
                          readonly=True)
@@ -74,7 +75,8 @@ class QualityAlert(models.Model):
     def generate_tests(self):
         quality_measure = self.env['quality.measure']
         measures = quality_measure.search([('product_id', '=', self.product_id.id),
-                                           ('trigger_time', 'in', self.picking_id.picking_type_id.id)])
+                                           ('trigger_time', 'in', self.picking_id.picking_type_id.id
+                                            or self.mrp_production_id.picking_type_id.id)])
         res = []
         for record in self.tests:
             res.append(record.name)

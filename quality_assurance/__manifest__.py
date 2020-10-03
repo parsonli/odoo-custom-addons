@@ -39,6 +39,7 @@
         'security/ir.model.access.csv',
         'views/quality_view.xml',
         'views/stock_view.xml',
+        'views/mrp_production_view.xml',
     ],
     'demo': [],
     'images': ['static/description/banner.jpg'],

@@ -195,7 +195,8 @@
                             <group>
                                 <field name="date"/>
                                 <!--<field name="origin"/>-->
-                                <field name="picking_id" readonly="1"/>
+                                <field name="picking_id" readonly="1" attrs="{'invisible': [('picking_id', '==', False)]}"/>
+                                <field name="mrp_production_id" readonly="1" attrs="{'invisible': [('mrp_production_id', '==', False)]}"/>
                             </group>
                         </group>
                         <notebook>

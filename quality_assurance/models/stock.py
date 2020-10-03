@@ -64,6 +64,14 @@ class StockPicking(models.Model):
         res = super(StockPicking, self).action_confirm()
         return res
 
+    @api.multi
+    def button_validate(self):
+        if self.alert_count == 0:
+            self.generate_quality_alert()
+        res = super(StockPicking, self).button_validate()
+        return res
+
+
     # @api.multi
     # def force_assign(self):
     #     if self.alert_count == 0:
