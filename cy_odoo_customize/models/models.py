@@ -77,7 +77,8 @@ class SaleOrder(models.Model):
 
     @api.multi
     def action_invoice_create(self, grouped=False, final=False):
-        if self.env.user.company_id.id != self.company_id.id:
-            raise UserError(_("请切换公司后再创建发票"))
-        res = super(SaleOrder, self).action_invoice_create()
-        return res
+        for order in self:
+            if order.env.user.company_id.id != order.company_id.id:
+                raise UserError(_("请切换公司后再创建发票"))
+            res = super(SaleOrder, self).action_invoice_create()
+            return res
