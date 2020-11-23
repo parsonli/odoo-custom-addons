@@ -55,6 +55,7 @@ class StockPicking(models.Model):
                     'picking_id': self.id,
                     'origin': self.name,
                     'company_id': self.company_id.id,
+                    'date': fields.datetime.now(),
                 })
 
     @api.multi
