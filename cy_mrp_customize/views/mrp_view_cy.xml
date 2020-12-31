@@ -8,12 +8,12 @@
             <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='quantity_done']" position="after">
-                    <field name="price_unit" string="单价" groups="abs_hide_sale_cost_price.group_cost_price_show"/>
                     <field name="price_total" string="小计" groups="abs_hide_sale_cost_price.group_cost_price_show"/>
                 </xpath>
                 <xpath expr="//notebook" position="after">
-                    <separator string="1.只改原材料，不改成品数量的，请先改好原材料后再标记完成"/>
-                    <separator string="2.需要改变生产数量的，先标记完成再解锁修改原材料和成品数量"/>
+                    <separator string="1.不可以解锁修改产成品数量"/>
+                    <separator string="2.在记录生产页面，增加/减少 消耗的物料"/>
+                    <separator string="3.先更新待生产数量，再点击生产。开始生产后，只能增加数量，不能减少数量"/>
                     <group class="oe_subtotal_footer oe_right" colspan="2" name="BOM总价" style="font-size:18px">
                         <field name="bom_price" groups="abs_hide_sale_cost_price.group_cost_price_show"/>
                         <field name="bom_price_total" groups="abs_hide_sale_cost_price.group_cost_price_show"/>

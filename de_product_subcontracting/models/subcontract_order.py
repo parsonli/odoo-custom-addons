@@ -47,14 +47,28 @@ class PurchaseSubcontracting(models.Model):
     _description = "Subcontracting Order"
     _order = 'date_order desc, id desc'
 
-    def _get_product_price_unit(self):
+    @api.depends('product_id', 'quantity', 'order_lines', 'price_unit', 'taxes_id')
+    def _get_product_current_price_unit(self):
         for record in self:
-            record.product_price_unit = record.product_id.standard_price
+            price_total = 0
+            if record.order_lines:
+                for price in record.order_lines:
+                    price_total += price.total_price
+            if record.taxes_id:
+                record.product_current_price_unit = record.price_unit / (
+                            1 + record.taxes_id[0].amount * record.taxes_id[0].price_include / 100) + (
+                                                                price_total / record.quantity)
+            else:
+                record.product_current_price_unit = record.price_unit + (price_total / record.quantity)
 
+    @api.depends('product_current_price_unit', 'order_lines')
     def _check_price_unit(self):
         for record in self:
             if record.product_id:
-                record.check_price_unit = record.product_price_unit != 0
+                val = 1
+                for line in record.order_lines:
+                    val *= line.check_price_unit
+                record.check_price_unit = (record.product_current_price_unit != 0) * val
 
     name = fields.Char('Order Reference', required=True, index=True, copy=False, default='New')
     date_order = fields.Datetime('Order Date', required=True, index=True, copy=False,default=fields.Datetime.now,
@@ -98,8 +112,9 @@ class PurchaseSubcontracting(models.Model):
     purchase_count = fields.Integer(string='Purchase', compute='_compute_purchase_ids')
     taxes_id = fields.Many2many('account.tax', string='税率',
                                 domain=['|', ('active', '=', False), ('active', '=', True)])
-    product_price_unit = fields.Float(string='单价', digits=dp.get_precision('Product Price'), compute='_get_product_price_unit')
     check_price_unit = fields.Boolean(compute='_check_price_unit')
+    product_current_price_unit = fields.Float(string='当前订单单价', digits=dp.get_precision('Product Price'), compute='_get_product_current_price_unit', store=True)
+
     @api.multi
     def unlink(self):
         for order in self:
@@ -217,7 +232,7 @@ class PurchaseSubcontracting(models.Model):
                 'partner_id': order.partner_id.id,
                 'state': 'confirmed',
                 'company_id': self.env.user.company_id.id,
-                'price_unit': order.product_id.standard_price or 0,
+                'price_unit': order.product_current_price_unit or order.product_id.standard_price,
                 'origin': order.name,
                 'product_uom_qty': order.quantity,
                 'purchase_line_id': purchase_rec_line.id
@@ -294,17 +309,26 @@ class PurchaseSubcontractingLine(models.Model):
     _description = 'Subcontract Order Line'
     _order = 'order_id, id'
 
+    @api.depends('product_id')
     def _get_price_unit(self):
         for line in self:
             line.price_unit = line.product_id.standard_price
 
+    @api.depends('price_unit', 'product_qty')
     def get_total_price(self):
         for line in self:
             line.total_price = line.product_qty * line.price_unit
+
+    @api.depends('price_unit')
+    def _check_price_unit(self):
+        for record in self:
+            if record.product_id:
+                record.check_price_unit = record.price_unit != 0
 
     order_id = fields.Many2one('purchase.subcontract.order', string='Order Reference', index=True, required=True, ondelete='cascade')
     product_id = fields.Many2one('product.product', string='Product', change_default=True, required=True)
     product_uom_id = fields.Many2one('uom.uom', 'UOM', related='product_id.uom_id', readonly=True)
     product_qty = fields.Float(string='Quantity', required=True)
-    price_unit = fields.Float(string='单价', digits=dp.get_precision('Product Price'), compute='_get_price_unit')
+    price_unit = fields.Float(string='单价', digits=dp.get_precision('Product Price'), compute='_get_price_unit', store=True)
     total_price = fields.Float(string='小计', compute='get_total_price')
+    check_price_unit = fields.Boolean(compute='_check_price_unit')

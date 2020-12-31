@@ -6,11 +6,13 @@ from odoo import models, fields, api
 class StockMove(models.Model):
     _inherit = "stock.move"
 
+    @api.depends('product_id', 'quantity_done')
     def _compute_price_total(self):
         for record in self:
-            record.price_total = record.price_unit * record.product_uom_qty
+            record.price_unit = record.product_id.standard_price
+            record.price_total = record.price_unit * record.quantity_done
 
-    price_total = fields.Float('小计', compute="_compute_price_total")
+    price_total = fields.Float('小计', compute="_compute_price_total", store=True)
 
     def _get_price_unit(self):
         """ Returns the unit price to store on the quant """
@@ -20,15 +22,16 @@ class StockMove(models.Model):
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
+    @api.depends('state', 'move_raw_ids', 'finished_move_line_ids')
     def _compute_bom_price_total(self):
         for record in self:
             total_price = 0
-            if self.move_raw_ids.ids:
+            if record.move_raw_ids.ids:
                 for item in record.move_raw_ids:
                     total_price += item.quantity_done * item.price_unit
                 record.bom_price_total = abs(total_price)
 
-    bom_price_total = fields.Float('BOM总价', compute='_compute_bom_price_total')
+    bom_price_total = fields.Float('BOM总价', compute='_compute_bom_price_total', store=True)
 
     def compute_production_uom_factor(self):
         if self.product_uom_id.uom_type == 'smaller':
@@ -39,9 +42,13 @@ class MrpProduction(models.Model):
             factor = 1
         return factor
 
+    @api.depends('bom_price_total')
     def _compute_bom_price(self):
-        if self.finished_move_line_ids.id:
-            self.bom_price = self.bom_price_total / self.finished_move_line_ids[0].qty_done * self.compute_production_uom_factor()
+        for record in self:
+            if record.finished_move_line_ids.id and record.finished_move_line_ids[0].qty_done != 0:
+                record.bom_price = (record.bom_price_total / record.finished_move_line_ids[0].qty_done) * record.compute_production_uom_factor()
+            else:
+                record.bom_price = 0
 
-    bom_price = fields.Float('成品单价', compute='_compute_bom_price')
+    bom_price = fields.Float('成品单价', compute='_compute_bom_price', store=True)
 

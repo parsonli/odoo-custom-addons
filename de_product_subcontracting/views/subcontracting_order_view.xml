@@ -25,8 +25,8 @@
         <field name="arch" type="xml">
             <form string="Subcontracting Order">
                 <header>
-                    <button name="action_confirm" type="object" states="draft" string="Confirm Order" id="draft_confirm"
-                            attrs="{'invisible': [('check_price_unit','!=',True)]}"/>
+                    <button name="action_confirm" type="object" string="Confirm Order" id="draft_confirm"
+                            attrs="{'invisible': ['|',('state','not in',['draft']),('check_price_unit','=', False)]}"/>
                     <button name="action_draft" states="cancel" string="Set to Draft" type="object" />
                     <button name="action_cancel" states="draft,subcontract" string="Cancel" type="object" />
                     <button name="action_done" type="object" string="Lock" states="subcontract"/>
@@ -34,9 +34,8 @@
                     <field name="state" widget="statusbar" statusbar_visible="draft,subcontract,done,cancel" readonly="1"/>
                 </header>
                 <div class="alert alert-danger" role="alert" style="margin-bottom:0px;"
-                         attrs="{'invisible':[('check_price_unit', '!=', False)]}">
-                        最终产品<field name="product_id" readonly="True"/>
-                        的价格未设置，请联系管理员先设置价格，再确认加工单
+                         attrs="{'invisible':[('check_price_unit', '=', True)]}">
+                        最终产品或原材料的价格未设置，请联系管理员先设置价格，再确认加工单
                 </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -90,7 +89,7 @@
                              <field name="product_id" domain="[('purchase_ok', '=', 'True')]" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
                              <field name="product_uom_id" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
                              <field name="quantity" attrs="{'readonly':[('state','in',['subcontract','done','cancel'])]}"/>
-                             <field name="product_price_unit" readonly="1"/>
+                             <field name="product_current_price_unit" readonly="1"/>
                              <field name="check_price_unit" invisible="1"/>
                         </group>
 
