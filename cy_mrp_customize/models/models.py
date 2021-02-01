@@ -42,7 +42,7 @@ class MrpProduction(models.Model):
             factor = 1
         return factor
 
-    @api.depends('bom_price_total')
+    @api.depends('state', 'bom_price_total', 'finished_move_line_ids')
     def _compute_bom_price(self):
         for record in self:
             if record.finished_move_line_ids.id and record.finished_move_line_ids[0].qty_done != 0:

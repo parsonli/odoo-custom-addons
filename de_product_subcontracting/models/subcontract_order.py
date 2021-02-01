@@ -54,11 +54,11 @@ class PurchaseSubcontracting(models.Model):
             if record.order_lines:
                 for price in record.order_lines:
                     price_total += price.total_price
-            if record.taxes_id:
+            if record.taxes_id and record.quantity != 0:
                 record.product_current_price_unit = record.price_unit / (
                             1 + record.taxes_id[0].amount * record.taxes_id[0].price_include / 100) + (
                                                                 price_total / record.quantity)
-            else:
+            elif record.quantity != 0:
                 record.product_current_price_unit = record.price_unit + (price_total / record.quantity)
 
     @api.depends('product_current_price_unit', 'order_lines')
@@ -71,13 +71,15 @@ class PurchaseSubcontracting(models.Model):
                 record.check_price_unit = (record.product_current_price_unit != 0) * val
 
     name = fields.Char('Order Reference', required=True, index=True, copy=False, default='New')
-    date_order = fields.Datetime('Order Date', required=True, index=True, copy=False,default=fields.Datetime.now,
+    date_order = fields.Datetime('Order Date', required=True, index=True, copy=False, default=fields.Datetime.now,
                                  help="Depicts the date where the Quotation should be validated and converted into a purchase order.")
     date_approve = fields.Date('Approval Date', readonly=1, index=True, copy=False)
     date_planned = fields.Datetime(string='Scheduled Date', required=True, index=True)
 
     partner_id = fields.Many2one('res.partner', string='Vendor', required=True,
                                  change_default=True, track_visibility='always',
+                                 default=lambda self: self.env['res.partner'].search([('name', '=', '上海强宏包装材料有限公司')],
+                                                                                         limit=1),
                                  help="You can find a vendor by its Name, TIN, Email or Internal Reference.")
     user_id = fields.Many2one('res.users',
                               string='Purchase Representative',
@@ -85,10 +87,12 @@ class PurchaseSubcontracting(models.Model):
                               track_visibility='onchange',
                               track_sequence=2,
                               default=lambda self: self.env.user)
-    location_id = fields.Many2one('stock.location', string='Subcontracting Location', required=True, index=True, ondelete='cascade',
+    location_id = fields.Many2one('stock.location', string='Subcontracting Location', required=True,
+                                  default=lambda self: self.env['stock.location'].search([('usage', '=', 'inventory')], limit=1),
                                   help="The vendor location for subcontracting process")
 
-    service_id = fields.Many2one(comodel_name="product.product", string="Service", required=True)
+    service_id = fields.Many2one('product.product', string='Service', required=True,
+                                 default=lambda self: self.env['product.product'].search([('name', '=', '委外加工费（重量）')], limit=1))
 
     company_id = fields.Many2one('res.company', 'Company', required=True, index=True,
                                  default=lambda self: self.env.user.company_id.id)
