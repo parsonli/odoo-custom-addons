@@ -424,7 +424,7 @@ class InsFinancialReport(models.TransientModel):
          ('last_month', 'Last Month'),
          ('last_quarter', 'Last Quarter'),
          ('last_financial_year', 'Last Financial Year')],
-        string='Date Range', default=_get_default_date_range
+        string='Date Range',  # default=_get_default_date_range
     )
     view_format = fields.Selection([
         ('vertical', 'Vertical'),
@@ -435,7 +435,7 @@ class InsFinancialReport(models.TransientModel):
     journal_ids = fields.Many2many('account.journal', string='Journals', required=True,
                                    default=lambda self: self.env['account.journal'].search(
                                        [('company_id', '=', self.company_id.id)]))
-    date_from = fields.Date(string='Start Date')
+    date_from = fields.Date(string='Start Date', default='2019-01-01')
     date_to = fields.Date(string='End Date')
     target_move = fields.Selection([('posted', 'All Posted Entries'),
                                     ('all', 'All Entries'),

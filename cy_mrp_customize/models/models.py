@@ -9,7 +9,7 @@ class StockMove(models.Model):
     @api.depends('product_id', 'quantity_done')
     def _compute_price_total(self):
         for record in self:
-            record.price_unit = record.product_id.standard_price
+            #record.price_unit = record.product_id.standard_price
             record.price_total = record.price_unit * record.quantity_done
 
     price_total = fields.Float('小计', compute="_compute_price_total", store=True)

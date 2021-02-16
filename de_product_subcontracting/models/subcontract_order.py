@@ -294,7 +294,6 @@ class PurchaseSubcontracting(models.Model):
             action['res_id'] = pickings.id
         return action
 
-
     @api.multi
     def action_view_purchase(self):
         action = self.env.ref('purchase.purchase_rfq').read()[0]
@@ -306,6 +305,28 @@ class PurchaseSubcontracting(models.Model):
             action['views'] = [(self.env.ref('purchase.purchase_order_form').id, 'form')]
             action['res_id'] = purchases.id
         return action
+
+    @api.multi
+    def generate_bom(self):
+        if not self.product_id.bom_ids:
+            raise UserError(_('未能找到产品的物料清单，请先确认以为产品配置物料清单后，再点击 生成外发原材料'))
+        else:
+            bom = self.product_id.bom_ids[0]
+            res = []
+            for record in self.order_lines:
+                res.append(record.product_id)
+
+            for bom_line in bom.bom_line_ids:
+                if bom_line.product_id not in res:
+                    self.env['purchase.subcontract.line'].create({
+                        'order_id': self.id,
+                        'product_id': bom_line.product_id.id,
+                        'product_uom_id': bom_line.product_id.uom_id,
+                        'product_qty': self.quantity * bom_line.product_qty / bom.product_qty,
+                        'price_unit': bom_line.product_id.standard_price,
+
+
+                    })
 
 
 class PurchaseSubcontractingLine(models.Model):
