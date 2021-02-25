@@ -6,17 +6,21 @@ from odoo import models, fields, api
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    @api.depends('product_id', 'quantity_done')
+    @api.depends('price_unit', 'quantity_done')
     def _compute_price_total(self):
         for record in self:
             #record.price_unit = record.product_id.standard_price
-            record.price_total = record.price_unit * record.quantity_done
+            record.price_total = record.product_id.standard_price * record.quantity_done
 
     price_total = fields.Float('小计', compute="_compute_price_total", store=True)
 
+    @api.multi
     def _get_price_unit(self):
-        """ Returns the unit price to store on the quant """
-        return not self.company_id.currency_id.is_zero(self.price_unit) and self.price_unit or self.production_id.bom_price or self.product_id.standard_price
+        self.ensure_one()
+        if self.production_id:
+            price_unit = self.production_id.bom_price
+            return price_unit
+        return super(StockMove, self)._get_price_unit()
 
 
 class MrpProduction(models.Model):
@@ -28,7 +32,7 @@ class MrpProduction(models.Model):
             total_price = 0
             if record.move_raw_ids.ids:
                 for item in record.move_raw_ids:
-                    total_price += item.quantity_done * item.price_unit
+                    total_price += item.price_total
                 record.bom_price_total = abs(total_price)
 
     bom_price_total = fields.Float('BOM总价', compute='_compute_bom_price_total', store=True)
