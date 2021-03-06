@@ -1,0 +1,217 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* enquiry_website_oin
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20191025\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-30 11:55+0000\n"
+"PO-Revision-Date: 2020-03-30 19:57+0800\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: zh\n"
+"X-Generator: Poedit 2.2.4\n"
+
+#. module: enquiry_website_oin
+#: model:mail.template,body_html:enquiry_website_oin.product_enquiry_email
+msgid ""
+"\n"
+"<div style=\"padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777\">\n"
+"    <table cellspacing=\"0\" cellpadding=\"0\" style=\"width:600px;border-collapse:collapse;background:inherit;color:inherit\">\n"
+"        <tbody><tr>\n"
+"            <td valign=\"center\" width=\"200\" style=\"padding:10px 10px 10px 5px;font-size: 12px\">\n"
+"                <img src=\"/logo.png\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${user.company_id.name}\">\n"
+"            </td>\n"
+"        </tr></tbody>\n"
+"    </table>\n"
+"</div>\n"
+"<div style=\"padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777\">\n"
+"<p>Dear ${object.contact_name},</p>\n"
+"    <p>\n"
+"        Thank you for your recent enquiry for more information concerning our products. We are excited to hear from you. In appreciation of your interest, I would like to invite you to become one of our many satisfied customers.\n"
+"    </p>\n"
+"    <p>\n"
+"        If you have any further questions, I would be happy to assist you.\n"
+"    </p>\n"
+"    <p>Best wishes,</p>\n"
+"</div>\n"
+"<div style=\"padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777\">\n"
+"    ${user.signature | safe}\n"
+"    <p style=\"font-size: 11px; margin-top: 10px;\">\n"
+"        <strong>Sent by ${user.company_id.name} using <a href=\"www.odoo.com\" style=\"text-decoration:none; color: #875A7B;\">Odoo</a></strong>\n"
+"    </p>\n"
+"</div>"
+msgstr ""
+"\n"
+"<div style=“padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777”>\n"
+"    <table cellspacing=“0” cellpadding=“0” style=“width:600px;border-collapse:collapse;background:inherit;color:inherit”>\n"
+"        <tbody><tr>\n"
+"            <td valign=“center” width=“200” style=“padding:10px 10px 10px 5px;font-size: 12px”>\n"
+"                <img src=“/logo.png” style=“padding: 0px; margin: 0px; height: auto; width: 80px;” alt=“${user.company_id.name}”>\n"
+"            </td>\n"
+"        </tr></tbody>\n"
+"    </table>\n"
+"</div>\n"
+"<div style=“padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777”>\n"
+"<p>亲爱的 ${object.contact_name},</p>\n"
+"    <p>\n"
+"        感谢您关注我们的产品以及希望知道有关于我们产品的信息。我们由衷地感谢您。对于您所关注的产品，我们会安排人员联系您。我们十分期待在未来能够与您合作，成为生意上的伙伴。\n"
+"    </p>\n"
+"    <p>\n"
+"        如果您有任何问题，请随时联系我们\n"
+"    </p>\n"
+"    <p>商祺,</p>\n"
+"</div>\n"
+"<div style=“padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777”>\n"
+"    ${user.signature | safe}\n"
+"    <p style=“font-size: 11px; margin-top: 10px;”>\n"
+"        <strong>Sent by ${user.company_id.name} using <a href=“www.odoo.com” style=“text-decoration:none; color: #875A7B;”>Odoo</a></strong>\n"
+"    </p>\n"
+"</div>"
+
+#. module: enquiry_website_oin
+#: model:mail.template,subject:enquiry_website_oin.product_enquiry_email
+msgid "${object.company_id.name} Product Enquiry"
+msgstr "${object.company_id.name} 产品询价"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid ""
+"<i class=\"fa fa-dollar\"/> <span class=\"hidden-xs\">Get Price Quote</span>\n"
+"                                    <span class=\"visible-xs-inline\">Continue</span>"
+msgstr ""
+"<i class=“fa fa-dollar”/> <span class=“hidden-xs”>获取</span>\n"
+"                                    <span class=“visible-xs-inline”>价格表</span>"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.enquiry_thankyou_ir_ui_view
+#: model_terms:website.page,arch_db:enquiry_website_oin.enquiry_thankyou
+msgid ""
+"<span>\n"
+"                                            We will look over your enquiry and get back to you shortly.<br/>\n"
+"                                            Feel free to contact us if you have further questions.<br/>\n"
+"                                            Thanks again!\n"
+"                                        </span>"
+msgstr ""
+"<span>\n"
+"                                            我们会尽快查看您的询价单，并且及时回复您。<br/>\n"
+"                                            如果您有任何问题，欢迎随时咨询我们。<br/>\n"
+"                                            再次感谢您的询价单!\n"
+"                                        </span>"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Cancel Registration"
+msgstr "取消"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "City"
+msgstr "城市"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Company Name"
+msgstr "公司名称"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.enquiry_thankyou_ir_ui_view
+#: model_terms:website.page,arch_db:enquiry_website_oin.enquiry_thankyou
+msgid "Continue To Our Website"
+msgstr "继续逛逛："
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Country"
+msgstr "国家/地区"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Country..."
+msgstr "国家..."
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "E.g.: Product Interested / Specification / Application / Total Qty. etc"
+msgstr "例如：对哪个产品感兴趣、技术指标、产品应用、需求量、等等"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Email"
+msgstr ""
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Full Name"
+msgstr "姓名"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.enquiry_thankyou_ir_ui_view
+#: model_terms:website.page,arch_db:enquiry_website_oin.enquiry_thankyou
+msgid "In the meantime,"
+msgstr "同时，"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.enquiry_thankyou_ir_ui_view
+#: model_terms:website.page,arch_db:enquiry_website_oin.enquiry_thankyou
+msgid "Look around on our website:"
+msgstr "再回去逛逛："
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_oin
+msgid "Make an Inquiry\n"
+"                <i class=\"fa fa-edit\" aria-hidden=\"true\"/>"
+msgstr "询价\n"
+"                <i class=\"fa fa-edit\" aria-hidden=\"true\"/>"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Message"
+msgstr "消息"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Mobile"
+msgstr "手机"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "State / Province"
+msgstr "州/省"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "State / Province..."
+msgstr "州/省..."
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Street 2"
+msgstr "街道2"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Street <span class=\"hidden-xs\"> and Number</span>"
+msgstr "街道 <span class=“hidden-xs”> 和 门牌号</span>"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.enquiry_thankyou_ir_ui_view
+#: model_terms:website.page,arch_db:enquiry_website_oin.enquiry_thankyou
+msgid "Thank You!"
+msgstr "谢谢您！"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.enquiry_thankyou_ir_ui_view
+#: model_terms:website.page,arch_db:enquiry_website_oin.enquiry_thankyou
+msgid "Your enquiry has been posted successfully."
+msgstr "您的询价单提交成功。"
+
+#. module: enquiry_website_oin
+#: model_terms:ir.ui.view,arch_db:enquiry_website_oin.product_enquiry
+msgid "Zip Code"
+msgstr "邮政编码"
