@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Product Enquiry Pop-up -->
+    <template id="product_enquiry" name="Product Enquiry Form">
+        <div id="add-inquiry" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myInquiryLabel">
+            <div class="modal-dialog modal-lg">
+                <form id="product_enquiry" t-attf-action="/shop/enquiry/#{slug(product)}" method="post" class="checkout_autoformat">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                            <h4 class="modal-title" id="myInquiryLabel">Make an Inquiry</h4>
+                        </div>
+                        <div class="modal-body form-row">
+                            <t t-set="login_user" t-value="request.env.user.partner_id"/>
+                            <div class="form-group col-lg-12 div_add_name">
+                                <label class="control-label" for="name">Full Name</label>
+                                <input type="text" name="name" class="form-control" t-attf-value="#{login_user.name or ''}" required="required" />
+                            </div>
+                            <div class="form-group col-lg-12 div_add_company_name">
+                                <label class="control-label" for="company_name">Company Name</label>
+                                <input type="text" name="company_name" class="form-control" value="" />
+                            </div>
+                            <div class="w-100"/>
+                            <div class="form-group col-lg-6 div_add_email">
+                                <label class="control-label" for="email">Email</label>
+                                <input type="email" name="email" class="form-control" t-attf-value="#{login_user.email or ''}" required="required"/>
+                            </div>
+                            <div class="form-group col-lg-6 div_add_mobile">
+                                <label class="control-label" for="mobile">Mobile</label>
+                                <input type="tel" name="mobile" class="form-control" t-attf-value="#{login_user.mobile or ''}" required="required"/>
+                            </div>
+                            <div class="w-100"/>
+                            <div class="form-group col-lg-12 div_add_street">
+                                <label class="control-label" for="street">Street <span class="hidden-xs"> and Number</span></label>
+                                <input type="text" name="street" class="form-control" t-attf-value="#{login_user.street or ''}" />
+                            </div>
+                            <div class="form-group col-lg-12 div_street2">
+                                <label class="control-label label-optional" for="street2" style="font-weight: bold;">Street 2</label>
+                                <input type="text" name="street2" class="form-control" t-attf-value="#{login_user.street2 or ''}"/>
+                            </div>
+                            <div class="w-100"/>
+                            <div class="form-group col-md-8 div_add_city">
+                                <label class="control-label" for="city">City</label>
+                                <input type="text" name="city" class="form-control" t-attf-value="#{login_user.city or ''}" />
+                            </div>
+                            <div class="form-group col-md-4 div_add_zip">
+                                <label class="control-label label-optional" for="zip" style="font-weight: bold;">Zip Code</label>
+                                <input type="text" name="zip" class="form-control" value="" />
+                            </div>
+                            <div class="w-100"/>
+                            <div t-attf-class="form-group col-lg-6 div_country">
+                                <label class="control-label" for="country_id">Country</label>
+                                <select id="country_id" name="country_id" class="form-control">
+                                    <option value="">Country...</option>
+                                    <t t-foreach="countries" t-as="c">
+                                        <option t-att-value="c.id" t-att-selected="c.id == (country and country.id or -1)">
+                                            <t t-esc="c.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div t-attf-class="form-group col-lg-6 div_state" t-att-style="(not country or not country.state_ids) and 'display: none'">
+                                <label class="control-label" for="state_id">State / Province</label>
+                                <select name="state_id" class="form-control" data-init="1">
+                                    <option value="">State / Province...</option>
+                                    <t t-foreach="country and country.state_ids or []" t-as="s">
+                                        <option t-att-value="s.id" t-att-selected="s.id == (country and login_user and login_user.state_id and login_user.state_id.id or None)">
+                                            <t t-esc="s.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="w-100"/>
+                            <div class="form-group col-lg-12 div_add_message">
+                                <label class="control-label" for="message">Message</label>
+                                <textarea class="form-control" name="message" id="message" rows="3" required="required"
+                                    placeholder="E.g.: Product Interested / Specification / Application / Total Qty. etc"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-dollar"/> <span class="hidden-xs">Get Price Quote</span>
+                                    <span class="visible-xs-inline">Continue</span>
+                                </button>
+                                <button type="button" class="btn btn-default js_goto_event" data-dismiss="modal">Cancel Registration</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- Show/Hide add to cart from products list view -->
+    <template id="products_item_oin" inherit_id="website_sale.products_item"
+        active="False" customize_show="True" name="Products item Enquiry">
+        <xpath expr="//div[hasclass('product_price')]" position="replace">
+        </xpath>
+    </template>
+
+    <!-- Show/Hide add to cart from product detail view -->
+    <template id="product_oin" inherit_id="website_sale.product"
+        active="False" customize_show="True" name="Product Enquiry">
+        <xpath expr="//div[@id='product_details']/form" position="replace">
+            <t t-call="enquiry_website_oin.product_enquiry" />
+            <a class="quick-view btn btn-primary btn-block" href="#add-inquiry"
+                t-if="product._is_add_to_cart_possible()"
+                role="button" data-toggle="modal" title="Make an Inquiry"
+                style="max-width: max-content;">Make an Inquiry
+                <i class="fa fa-edit" aria-hidden="true"/>
+            </a>
+        </xpath>
+    </template>
+
+    <record id="enquiry_thankyou" model="website.page">
+        <field name="url">/enquiry-thank-you</field>
+        <field name="website_published">True</field>
+        <field name="name">Thank you (Enquiry)</field>
+        <field name="type">qweb</field>
+        <field name="key">enquiry_website_oin.enquiry_thankyou</field>
+        <field name="arch" type="xml">
+            <t name="Thank you (Enquiry)" t-name="enquiry_website_oin.enquiry_thankyou">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="oe_structure">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h1 class="text-center">Thank You!</h1>
+                                        <p class="text-center">
+                                            Your enquiry has been posted successfully.
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-12 mt32 text-center">
+                                        <span>
+                                            We will look over your enquiry and get back to you shortly.<br/>
+                                            Feel free to contact us if you have further questions.<br/>
+                                            Thanks again!
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row" id="o_recruitment_thank_cta">
+                                    <div class="col-lg-12 text-center mt32 mb32">
+                                        In the meantime,
+                                        <h3 class="mt8 mb32">Look around on our website:</h3>
+                                        <a href="/" class="btn btn-primary btn-lg">Continue To Our Website</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+</odoo>
