@@ -2,6 +2,11 @@
 from odoo import api, fields, models, _
 
 
+class MrpProduction(models.Model):
+    _inherit = 'mrp.production'
+    _order = 'name desc'
+
+
 class PieceWork(models.Model):
     _name = 'piece.work'
     _description = '计件'
