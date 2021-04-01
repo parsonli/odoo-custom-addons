@@ -21,100 +21,39 @@
 
 from odoo import api, models
 
-class product_product(models.Model):
+
+class ProductProduct(models.Model):
     _inherit = "product.product"
 
     @api.model
     def _name_search(self, name, args=None, operator='ilike', limit=100, name_get_uid=None):
-        pricelist = self.env['product.pricelist'].browse(self._context.get('pricelist'))
-
-        if name and pricelist:
+        pricelist_id = self._context.get('pricelist')
+        if not args:
+            args = []
+        # case 1 both name and price list
+        if name and pricelist_id:
+            pricelist = self.env['product.pricelist'].browse(pricelist_id)
             product_list = []
-
             for record in pricelist.item_ids:
                 if record.applied_on == '0_product_variant':
                     product_list.append(record.product_id.id)
 
-            product_ids = self.browse(product_list)._search([('id', '=', product_list)] + [('default_code', operator, name)], limit=limit)
+            product_ids = self._search(args + [('id', '=', product_list), ('default_code', operator, name)], limit=limit)
+            if not limit or len(product_ids) < limit:
+                limit2 = (limit - len(product_ids)) if limit else False
+                product2_ids = self._search(args + [('id', '=', product_list), ('name', operator, name), ('id', 'not in', product_ids)], limit=limit2)
+                product_ids.extend(product2_ids)
             return self.browse(product_ids).name_get()
-            # else:
-            #     return super(product_product, self)._name_search()
-        elif pricelist:
+        # case 2 only price list
+        # case 3 only name
+        # case 4 no name or price list but its a sales order
+        elif pricelist_id or pricelist_id != None:
+            pricelist = self.env['product.pricelist'].browse(pricelist_id)
             product_list = []
             for record in pricelist.item_ids:
                 if record.applied_on == '0_product_variant':
                     product_list.append(record.product_id.id)
             return self.browse(product_list).name_get()
+        # case 5 no name or price list and its not a sales order
         else:
-            return super(product_product, self)._name_search(name, args, operator, limit=limit)
-
-
-    # @api.multi
-    # def name_get(self):
-    #     if self._context.get('temp'):
-    #         return super(product_product, self).name_get()
-    #     product_list = []
-    #     pricelist = self.env['product.pricelist'].browse(self._context.get('pricelist'))
-    #     if pricelist:
-    #         for record in pricelist.item_ids:
-    #             if record.applied_on == '0_product_variant':
-    #                 product_list.append(record.product_id.id)
-    #
-    #     if product_list and len(self.ids) < 8:
-    #         product_list_intersection = set(product_list).intersection(set(self.ids))
-    #         self = self.browse(product_list_intersection)
-    #     if product_list and len(self.ids) > 7:
-    #         self = self.browse(product_list)
-    #
-    #     result = super(product_product, self).name_get()
-    #     return result
-
-class SaleOrderLine(models.Model):
-    _inherit = 'sale.order.line'
-
-    @api.multi
-    @api.onchange('product_id')
-    def product_id_change(self):
-        if not self.product_id:
-            return {'domain': {'product_uom': []}}
-
-        vals = {}
-        domain = {'product_uom': [('category_id', '=', self.product_id.uom_id.category_id.id)]}
-        if not self.product_uom or (self.product_id.uom_id.id != self.product_uom.id):
-            vals['product_uom'] = self.product_id.uom_id
-            vals['product_uom_qty'] = 1.0
-        product = self.product_id.with_context(
-            lang=self.order_id.partner_id.lang,
-            partner=self.order_id.partner_id.id,
-            quantity=vals.get('product_uom_qty') or self.product_uom_qty,
-            date=self.order_id.date_order,
-            pricelist=self.order_id.pricelist_id.id,
-            uom=self.product_uom.id
-        )
-        result = {'domain': domain}
-
-        title = False
-        message = False
-        warning = {}
-        if product.sale_line_warn != 'no-message':
-            title = _("Warning for %s") % product.name
-            message = product.sale_line_warn_msg
-            warning['title'] = title
-            warning['message'] = message
-            result = {'warning': warning}
-            if product.sale_line_warn == 'block':
-                self.product_id = False
-                return result
-
-        name = product.with_context(temp=True).name_get()[0][1]
-        if product.description_sale:
-            name += '\n' + product.description_sale
-        vals['name'] = name
-
-        self._compute_tax_id()
-
-        if self.order_id.pricelist_id and self.order_id.partner_id:
-            vals['price_unit'] = self.env['account.tax']._fix_tax_included_price_company(
-                self._get_display_price(product), product.taxes_id, self.tax_id, self.company_id)
-        self.update(vals)
-        return result
+            return super(ProductProduct, self)._name_search(name, args, operator, limit=limit)
