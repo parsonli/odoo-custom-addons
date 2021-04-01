@@ -24,25 +24,50 @@ from odoo import api, models
 class product_product(models.Model):
     _inherit = "product.product"
 
-    @api.multi
-    def name_get(self):
-        if self._context.get('temp'):
-            return super(product_product, self).name_get()
-        product_list = []
+    @api.model
+    def _name_search(self, name, args=None, operator='ilike', limit=100, name_get_uid=None):
         pricelist = self.env['product.pricelist'].browse(self._context.get('pricelist'))
-        if pricelist:
+
+        if name and pricelist:
+            product_list = []
+
             for record in pricelist.item_ids:
                 if record.applied_on == '0_product_variant':
                     product_list.append(record.product_id.id)
 
-        if product_list and len(self.ids) < 8:
-            product_list_intersection = set(product_list).intersection(set(self.ids))
-            self = self.browse(product_list_intersection)
-        if product_list and len(self.ids) > 7:
-            self = self.browse(product_list)
+            product_ids = self.browse(product_list)._search([('id', '=', product_list)] + [('default_code', operator, name)], limit=limit)
+            return self.browse(product_ids).name_get()
+            # else:
+            #     return super(product_product, self)._name_search()
+        elif pricelist:
+            product_list = []
+            for record in pricelist.item_ids:
+                if record.applied_on == '0_product_variant':
+                    product_list.append(record.product_id.id)
+            return self.browse(product_list).name_get()
+        else:
+            return super(product_product, self)._name_search(name, args, operator, limit=limit)
 
-        result = super(product_product, self).name_get()
-        return result
+
+    # @api.multi
+    # def name_get(self):
+    #     if self._context.get('temp'):
+    #         return super(product_product, self).name_get()
+    #     product_list = []
+    #     pricelist = self.env['product.pricelist'].browse(self._context.get('pricelist'))
+    #     if pricelist:
+    #         for record in pricelist.item_ids:
+    #             if record.applied_on == '0_product_variant':
+    #                 product_list.append(record.product_id.id)
+    #
+    #     if product_list and len(self.ids) < 8:
+    #         product_list_intersection = set(product_list).intersection(set(self.ids))
+    #         self = self.browse(product_list_intersection)
+    #     if product_list and len(self.ids) > 7:
+    #         self = self.browse(product_list)
+    #
+    #     result = super(product_product, self).name_get()
+    #     return result
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
