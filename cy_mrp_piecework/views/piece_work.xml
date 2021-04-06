@@ -154,6 +154,35 @@
         </search>
        </field>
     </record>
+
+    <!-- 计件设置form-->
+    <record id="res_config_settings_piecework" model="ir.ui.view">
+        <field name="name">res.config.settings.piecework</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mrp.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-string='Manufacturing']" position="inside">
+                    <h2>计件设置</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="piece_work_product_id" string="计件分"/>
+                                <div class="text-muted">
+                                    选择一个产品作为计件分，确保它出现在您所有的BOM中<br/>
+                                    这个计件分会在计件模块中用到
+                                </div>
+                                <field name="piece_work_product_id"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+            </xpath>
+
+        </field>
+    </record>
+
     <!-- 计件 tree,form action -->
     <record id="piece_work_action" model="ir.actions.act_window">
         <field name="name">车间员工计件台账</field>
@@ -182,6 +211,7 @@
           </p>
         </field>
     </record>
+
     <!-- Top menu item -->
     <menuitem name="计件"
               id="piece_work_menu"
@@ -191,13 +221,9 @@
 
 
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="action_piece_work"
-              name="台账"
-              parent="piece_work_menu"
-              action="piece_work_action"
-              sequence="20"
-              groups="piece_work_manager"/>
+    <menuitem id="action_piece_work" name="台账" parent="piece_work_menu" action="piece_work_action" sequence="20" groups="piece_work_manager"/>
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="action_piece_work_detail" name="明细" parent="piece_work_menu" action="piece_work_detail_action" sequence="25"/>
-
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="action_piece_work_setting" name="设置" parent="piece_work_menu" action="mrp.action_mrp_configuration" sequence="35" groups="piece_work_manager"/>
 </odoo>

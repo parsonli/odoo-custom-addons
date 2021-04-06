@@ -2,6 +2,18 @@
 from odoo import api, fields, models, _
 
 
+class ResCompany(models.Model):
+    _inherit = "res.company"
+
+    piece_work_product_id = fields.Many2one('product.product', string="默认的产品（计件分）")
+
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    piece_work_product_id = fields.Many2one('product.product', string="默认的产品（计件分）", related='company_id.piece_work_product_id', readonly=False)
+
+
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
     _order = 'name desc'
@@ -189,7 +201,7 @@ class PieceWorkLine(models.Model):
             }
         else:
             bom_id = self.product_id.variant_bom_ids.id
-            vals['piece_credit'] = self.env['mrp.bom.line'].search([('product_id', '=', 1774), ('bom_id', '=', bom_id)])[0].product_qty
+            vals['piece_credit'] = self.env['mrp.bom.line'].search([('product_id', '=', self.env.user.company_id.piece_work_product_id.id), ('bom_id', '=', bom_id)])[0].product_qty
 
         self.update(vals)
 
@@ -214,8 +226,9 @@ class PieceWorkLine(models.Model):
 
         else:
             bom_id = self.product_id.variant_bom_ids.id
-            credit = self.env['mrp.bom.line'].search([('product_id', '=', 1774), ('bom_id', '=', bom_id)])[
+            credit = self.env['mrp.bom.line'].search([('product_id', '=', self.env.user.company_id.piece_work_product_id.id), ('bom_id', '=', bom_id)])[
                 0].product_qty
             vals['piece_credit'] = credit / self.compute_uom_factor()
             vals['amount_remain'] = self.compute_amount_remain_function()
         self.update(vals)
+
