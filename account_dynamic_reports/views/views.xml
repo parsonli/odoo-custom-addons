@@ -28,6 +28,7 @@
                     <field name="type"/>
                     <field name="sign"/>
                     <field name="style_overwrite" invisible="1"/>
+                    <field name="x_report_name"/>
                 </group>
                 <notebook
                         attrs="{'invisible': [('type','not in',['accounts','account_type', 'account_report'])]}">

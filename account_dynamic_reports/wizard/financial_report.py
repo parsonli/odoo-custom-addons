@@ -435,15 +435,15 @@ class InsFinancialReport(models.TransientModel):
     journal_ids = fields.Many2many('account.journal', string='Journals', required=True,
                                    default=lambda self: self.env['account.journal'].search(
                                        [('company_id', '=', self.company_id.id)]))
-    date_from = fields.Date(string='Start Date', default='2019-01-01')
-    date_to = fields.Date(string='End Date')
+    date_from = fields.Date(string='Start Date', related='account_report_id.date_from', readonly=False)
+    date_to = fields.Date(string='End Date', related='account_report_id.date_to', readonly=False)
     target_move = fields.Selection([('posted', 'All Posted Entries'),
                                     ('all', 'All Entries'),
                                     ], string='Target Moves', required=True, default='posted')
 
     enable_filter = fields.Boolean(
         string='Enable Comparison',
-        default=False)
+        related='account_report_id.enable_filter', readonly=False)
     account_report_id = fields.Many2one(
         'ins.account.financial.report',
         string='Account Reports',
@@ -459,11 +459,11 @@ class InsFinancialReport(models.TransientModel):
     analytic_tag_ids = fields.Many2many(
         'account.analytic.tag', string='Analytic Tags'
     )
-    date_from_cmp = fields.Date(string='Start Date')
-    date_to_cmp = fields.Date(string='End Date')
+    date_from_cmp = fields.Date(string='Start Date', related='account_report_id.date_from_cmp', readonly=False)
+    date_to_cmp = fields.Date(string='End Date', related='account_report_id.date_to_cmp', readonly=False)
     filter_cmp = fields.Selection([('filter_no', 'No Filters'), ('filter_date', 'Date')], string='Filter by',
                                   required=True, default='filter_date')
-    label_filter = fields.Char(string='Column Label', default='Comparison Period',
+    label_filter = fields.Char(string='Column Label', related='account_report_id.label_filter', readonly=False,
                                help="This label will be displayed on report to show the balance computed for the given comparison filter.")
 
     @api.model

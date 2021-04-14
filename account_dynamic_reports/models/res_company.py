@@ -91,7 +91,12 @@ class ins_account_financial_report(models.Model):
         ('6', 'Smallest Text'),
         ], 'Financial Report Style', default='0',
         help="You can set up here the format you want this record to be displayed. If you leave the automatic formatting, it will be computed based on the financial reports hierarchy (auto-computed field 'level').")
-
+    date_from = fields.Date(string='开始日期')
+    date_to = fields.Date(string='结束日期')
+    enable_filter = fields.Boolean(string='启用比较', default=False)
+    date_from_cmp = fields.Date(string='开始日期')
+    date_to_cmp = fields.Date(string='结束日期')
+    label_filter = fields.Char(string='列标签')
 
 class AccountAccount(models.Model):
     _inherit = 'account.account'
